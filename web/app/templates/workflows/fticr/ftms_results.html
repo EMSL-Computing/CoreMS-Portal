@@ -1,0 +1,125 @@
+{% block content %}
+<br>
+<table id="ftmsResultsTable"class="table is-fullwidth is-hoverable">
+    <thead>
+      <tr id="ftmsResultsTableNav" class="is-hidden">
+        <td>
+          <a title="Delete Selected" class="removeSelectedFtmsResults" onClick="removeSelectedFtmsResults()" >
+            
+            <span class="icon is-medium">
+              <i class="fa fa-minus-circle" aria-hidden="true"></i>
+            </span>
+          </a>
+          <a title="Download Selected" class="downloadSelectedFtmsResults" onClick="downloadSelectedFtmsResults( )" >
+           
+            <span class="icon is-medium">
+              <i class="fa fa-download" aria-hidden="true"></i>
+            </span>
+          </a>
+          <a title="Merge and Download Files" class="combineSelectedFtmsResults" onClick="open_ftms_merge_variable_gui()" >
+            <span class="icon is-medium">
+              <i class="fa fa-file-medical" aria-hidden="true"></i>
+            </span>
+          </a>
+        </td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <th>Name/Stats</th>
+        <th><abbr title="Upload Date">Date</abbr></th>
+        <th><abbr title="Result Identifier">ID</abbr></th>
+        <th>Status</th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tfoot>
+      <tr>
+        <th>Name/Stats</th>
+        <th><abbr title="Upload Date">Date</abbr></th>
+        <th><abbr title="Result Identifier">ID</abbr></th>
+        <th>Status</th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </tfoot>
+    
+    <tbody>
+      {% for data in ftms_results%}
+        {% if data.status != 'Success' %}
+          {% set icon_class = 'is-disable' %}
+        {% else %}
+          {% set icon_class = '' %}
+        {% endif %}
+        <tr style="word-wrap:break-word;" id={{data.id}} class='ftmsresulttable'>
+          <td >
+            {{ data.name }}{{ data.modifier }}
+            <br>
+            <br>
+            {{ data.stats_formatted }}
+          </td>
+            
+            <td >{{ data.pst_time_stamp  }}</td>
+            
+            <td >{{data.id}}</td>
+            <td >{{data.status}}</td>
+            
+            <td><a class={{icon_class}} title="Download Data" href="{{ url_for('fticrms.download_table', id=data.id) }}" >
+                <span class="icon">
+                <i class="fa fa-download" aria-hidden="true"></i>
+                </span>
+                </a>
+            </td>
+            <td><a class={{icon_class}} title="Download Settings" href="{{ url_for('fticrms.download_results_params', id=data.id) }}">
+                <span class="icon">
+                <i class="fa fa-cog" aria-hidden="true"></i>
+                </span>
+                </a>
+            </td>
+            <td><a id="{{data.id }}" title="Delete Results" class="remove_ftms_result" onClick="removeFtmsResult('{{ url_for('fticrms.remove_result', id=data.id) }}', '{{ data.id }}')" >
+                    <span class="icon">
+                    <i class="fa fa-minus-circle" aria-hidden="true"></i>
+                    </span>
+                </a>
+            </td>
+            <td><a class={{icon_class}} title="Open Result" id="open_ftms_results" class="open_ftms_results" id="{{ data.id }}" onClick="openDataResultsModal('{{ '/ftms/results_modal/' + data.id|string }}')">
+              <span class="icon is-small">
+                <i class="fa fa-chart-bar"></i>
+              </span>
+            </button>
+          </td>
+          
+        </tr>
+        {% endfor %}
+        <div class="control is-expanded" id="ftms_merge_variable_gui" title="Molecular Formula Merge: Select Variable:">
+          <div class="select is-fullwidth">
+            <select name="ftms_merge_variable" id="ftms_merge_variable">
+              <option value="Peak Height">Peak Height</option>
+              <option value="Peak Area">Peak Area</option>
+              <option value="S_N">S/N</option>
+              <option value="m_z">m/z</option>
+              <option value="Calibrated m_z">Calibrated m/z</option>
+              <option value="m_z Error (ppm)">m/z Error (ppm)</option>
+              <option value="Confidence Score">Confidence Score</option>
+          </select>
+          </div>
+        </div>
+      </tbody>
+
+</table>
+
+
+
+
+{% endblock %}

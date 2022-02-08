@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+<div class="ftms-tabs tabs mb-0">
+    <ul>
+      <li class="is-active" id="ftmsinput-tab">
+        <a onClick="switchToFtmsInput()">
+          <span class="icon is-small"><i class="fas fa-file-alt" aria-hidden="true"></i></span>
+          <span>Data Upload</span>
+        </a>
+      </li>
+      <li id="ftmsdata-tab">
+        <a onClick="switchToFtmsData()">
+          <span class="icon is-small"><i class="fas fa-database" aria-hidden="true"></i></span>
+          <span>Data</span>
+        </a>
+      </li>
+      <li id="ftmsparams-tab">
+        <a onClick="switchToFtmsSettings()">
+          <span class="icon is-small"><i class="fas fa-cogs" aria-hidden="true"></i></span>
+          <span>Settings</span>
+        </a>
+      </li>
+      <li class="" id="ftmsprocess-tab">
+        <a onClick="switchToFtmsProcess()">
+          <span class="icon is-small"><i class="fas fa-hammer" aria-hidden="true"></i></span>
+          <span>Process</span>
+        </a>
+      </li>
+      <li id="ftmsresult-tab">
+        <a onClick="switchToFtmsResult()">
+          <span class="icon is-small"><i class="fas fa-chart-bar" aria-hidden="true"></i></span>
+          <span>Results</span>
+        </a>
+      </li>
+    </ul>
+</div>
+
+    <div id="ftmsinput-tab-content" >
+        {% include 'workflows/fticr/file_upload.html' %}
+    </div>
+    <div id="ftmsdata-tab-content" style="height: 80vh; overflow: auto;">
+      {% include 'workflows/fticr/manage_data.html' %}
+    </div>
+    <div id="ftmsparams-tab-content" style="height: 80vh; overflow: auto;">
+      {% include 'workflows/fticr/ftms_param_form.html' %}
+    </div>
+    <div id="ftmsprocess-tab-content" style="height: 80vh; overflow: auto;">
+      {% include 'workflows/fticr/ftms_process.html' %}
+    </div> 
+    <div id="ftmsresult-tab-content" style="height: 80vh; overflow: auto;">
+      {% include 'workflows/fticr/ftms_results.html' %}
+    </div>
+    
+{% endblock %}  

@@ -1,0 +1,287 @@
+{% block content %}
+        
+<form class="ftmssettings" id="ftmssettings" onsubmit="updateFtmsFormData(this.id)"  method="POST">
+    <h3 class="subtitle">
+        Mass Spectrum Settings
+    </h3>
+    <div class="field is-horizontal">
+        <div class="field-label is-normal">
+            {{ ms_form.threshold_method.label(class="label") }}
+        </div>
+        <div class="field-body">
+            <div class="field">
+                <div class="control">
+                    <div class="select is-fullwidth">
+                        {{ ms_form.threshold_method(class="select") }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="field is-horizontal">
+        <div class="field-label is-normal">
+        <label class="label"> Threshold Value: </label>
+        </div>
+        
+        <div class="field is-grouped">
+            <p class="control is-expanded">
+                <div class="field is-horizontal">
+                    <div class="field-label is-normal">
+                        Std
+                    </div>
+                    <div class="field-body">
+                        <div class="field">
+                            <div class="control">
+                                {{ ms_form.noise_threshold_std(class="input",  type="number", min="0") }}
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+            </p>
+            <p class="control">
+                <div class="field is-horizontal">
+                    <div class="field-label is-normal">
+                        S/N
+                    </div>
+                    <div class="field-body">
+                        <div class="field">
+                            <div class="control">
+                                {{ ms_form.s2n_threshold(class="input", step='0.01',  type="number", min="0") }}
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+            </p>
+            <p class="control">
+                <div class="field is-horizontal">
+                    <div class="field-label is-normal">
+                        %
+                    </div>
+                    <div class="field-body">
+                        <div class="field">
+                            <div class="control">
+                                {{ ms_form.relative_abundance_threshold(class="input",  step='0.00001',  type="number", min="0") }}
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+            </p>
+        </div>
+    </div>   
+    
+    <div class="field is-horizontal">
+        <div class="field-label is-normal">
+        <label class="label"> Auto Noise m/z Range: </label>
+        </div>
+        <div class="field is-grouped">
+            <p class="control is-expanded">
+                <div class="field is-horizontal">
+                    <div class="field-label is-normal">
+                        min 
+                    </div>
+                    <div class="field-body">
+                        <div class="field">
+                            <div class="control">
+                                {{ ms_form.min_noise_mz(class="input", step='0.000001', type="number", min="0") }}
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+            </p>
+            <p class="control">
+                <div class="field is-horizontal">
+                    <div class="field-label is-normal">
+                        max
+                    </div>
+                    <div class="field-body">
+                        <div class="field">
+                            <div class="control">
+                                {{ ms_form.max_noise_mz(class="input", step='0.000001', type="number", min="0") }}
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+            </p>
+        </div>
+    </div>   
+    <hr>
+    <div class="field is-horizontal">
+        <div class="field-label is-normal">
+        <label class="label"> m/z Range: </label>
+        </div>
+        <div class="field is-grouped">
+            <p class="control is-expanded">
+                <div class="field is-horizontal">
+                    <div class="field-label is-normal">
+                        min 
+                    </div>
+                    <div class="field-body">
+                        <div class="field">
+                            <div class="control">
+                                {{ ms_form.min_picking_mz(class="input", step='0.000001', type="number", min="0") }}
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+            </p>
+            <p class="control">
+                <div class="field is-horizontal">
+                    <div class="field-label is-normal">
+                        max
+                    </div>
+                    <div class="field-body">
+                        <div class="field">
+                            <div class="control">
+                                {{ ms_form.max_picking_mz(class="input",  step='0.000001', type="number", min="0") }}
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+            </p>
+        </div>
+    </div>    
+    <hr>
+    
+    <div class="field is-horizontal">
+        <div class="field-label is-normal">
+        <label class="label"> Scan Range: </label>
+        </div>
+        <div class="field is-grouped">
+            <p class="control is-expanded">
+                <div class="field is-horizontal">
+                    <div class="field-label is-normal">
+                        {{ ms_form.start_scan.label }}
+                    </div>
+                    <div class="field-body">
+                        <div class="field">
+                            <div class="control">
+                                {{ ms_form.start_scan(class="input",  type="number", min="0") }}
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+            </p>
+            <p class="control">
+                <div class="field is-horizontal">
+                    <div class="field-label is-normal">
+                        {{ ms_form.final_scan.label }}
+                    </div>
+                    <div class="field-body">
+                        <div class="field">
+                            <div class="control">
+                                {{ ms_form.final_scan(class="input",  type="number", min="0") }}
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+            </p>
+        </div>
+    </div>    
+    <hr>
+    
+    <div class="field is-horizontal">
+        <div class="field-label is-normal">
+            {{ ms_form.calib_minimize_method.label(class="label") }}  
+        </div>
+        <div class="field-body">
+            <div class="field">
+                <div class="control">
+                    <div class="select is-fullwidth">
+                        {{ ms_form.calib_minimize_method(class="input") }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+
+    <div class="field is-horizontal">
+        <div class="field-label is-normal">
+        <label class="label"> Calibration: </label>
+        </div>
+        
+        <div class="field is-grouped">
+            <p class="control is-expanded">
+                <div class="field is-horizontal">
+                    <div class="field-label is-normal">
+                        S/N
+                    </div>
+                    <div class="field-body">
+                        <div class="field">
+                            <div class="control">
+                                {{ ms_form.calib_sn_threshold(class="input", step='0.01', type="number", min="0") }}
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+            </p>
+            <p class="control">
+                <div class="field is-horizontal">
+                    <div class="field-label is-normal">
+                        Pol.
+                    </div>
+                    <div class="field-body">
+                        <div class="field">
+                            <div class="control">
+                                {{ ms_form.calib_pol_order(class="input", type="number", min="0") }}
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+            </p>
+            
+        </div>
+    </div>  
+
+    <div class="field is-horizontal">
+        <div class="field-label is-normal">
+        <label class="label"> Calibration m/z Error (ppm): </label>
+        </div>
+        <div class="field is-grouped">
+            <p class="control is-expanded">
+                <div class="field is-horizontal">
+                    <div class="field-label is-normal">
+                        min 
+                    </div>
+                    <div class="field-body">
+                        <div class="field">
+                            <div class="control">
+                                {{ ms_form.min_calib_ppm_error(class="input", step='0.000001', type="number", min="-100", max="100") }}
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+            </p>
+            <p class="control">
+                <div class="field is-horizontal">
+                    <div class="field-label is-normal">
+                        max
+                    </div>
+                    <div class="field-body">
+                        <div class="field">
+                            <div class="control">
+                                {{ ms_form.max_calib_ppm_error(class="input", step='0.000001', type="number", min="-100", max="100") }}
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+            </p>
+        </div>
+    </div>    
+
+    <div class="field is-horizontal">
+        <div class="field-label">
+            <!-- Left empty for spacing -->
+        </div>
+        <div class="field-body">
+            <div class="field">
+            <div class="control">
+                {{ ms_form.submitms(class="button is-block is-info is-medium is-fullwidth ftmsSettingsSubmit") }}
+            </div>
+            </div>
+        </div>
+    </div>
+
+</form>
+ 
+{% endblock %}

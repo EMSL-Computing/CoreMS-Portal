@@ -1,0 +1,59 @@
+version: '3.7'
+services:
+  web:
+    restart: always
+    build: ./web
+    ports: 
+      - 80:80
+    env_file:
+      - ./prod.env
+      - ./minio.env
+  
+  minio:
+    image: minio/minio
+    volumes:
+      - data-volume:/data
+    ports:
+      - '9000:9000'
+      - '9001:9001'
+    env_file:
+      - ./minio.env
+    command:  minio server /data --console-address ":9001"
+  
+  runner:
+    restart: always
+    build: ./runner
+    env_file:
+      - ./prod.env
+      - ./minio.env
+#    command: celery -A api.celery worker --loglevel=INFO --concurrency=6
+
+  redis-celery:
+
+    restart: always
+    image: "redis"
+    volumes:
+      - redis-volume:/var/lib/redis
+      - redis-volume:/usr/local/etc/redis/redis.conf
+
+    ports:
+        - "6379:6379"
+
+    environment:
+      - REDIS_REPLICATION_MODE=master
+
+  postgres-db:
+
+    restart: always
+    image: postgres:latest
+    volumes:
+      - db-volume:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    env_file:
+      - ./db-prod.env
+
+volumes:
+    redis-volume:
+    db-volume:
+    data-volume:

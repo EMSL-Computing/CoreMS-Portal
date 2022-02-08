@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="column is-4 is-offset-4">
+    <h3 class="title">Login</h3>
+    <div class="box">
+        {% for error in form.email.errors %}
+            <div class="notification is-danger">
+                {{ error }}
+            </div>
+        {% endfor %}
+        
+        {% for error in form.password.errors %}
+            <div class="notification is-danger">
+                {{ error }}
+            </div>
+        {% endfor %}    
+
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="notification is-danger">
+                {{ messages[0] }}
+            </div>
+        {% endif %}
+        {% endwith %}
+        <form method="POST" action="/login">
+            {{ form.hidden_tag() }}
+            <div class="field">
+                <div class="control">
+                    {{ form.email(class="input is-large", placeholder="Your Email") }}
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    {{ form.password(class="input is-large", placeholder="Your Password") }}
+                </div>
+            </div>
+            <div class="field">
+                <label class="checkbox">
+                    <p>{{ form.remember_user() }} {{ form.remember_user.label }}</p>
+                </label>
+            </div>
+            {{ form.submit(class="button is-block is-info is-large is-fullwidth") }}
+            
+        </form>
+        Go to <a href="{{ url_for('auth.signup') }}">registration page</a>.
+    </div>
+</div>
+{% endblock %}

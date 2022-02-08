@@ -1,0 +1,65 @@
+{% block content %}
+
+        
+        
+<form class="ftmssettings" id="ftmstransietsettings" onsubmit="updateFtmsFormData(this.id)" method="POST">
+    <h3 class="subtitle">
+        Transient Settings
+    </h3>    
+    <div class="field is-horizontal">        
+        <div class="field-label is-normal">
+            {{ transient_form.apodization_method.label(class="label") }}
+        </div>
+        <div class="field-body">
+            <div class="field">
+                <div class="control">
+                    <div class="select is-fullwidth">
+                        {{ transient_form.apodization_method(class="select") }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="field is-horizontal">
+        <div class="field-label is-normal">
+        {{ transient_form.number_of_truncations.label(class="label") }}
+        </div>
+        <div class="field-body">
+            <div class="field">
+                <div class="control">
+                    {{ transient_form.number_of_truncations(class="input",  type="number", min="0") }}  
+                </div>
+            </div>
+        </div>
+    </div>  
+
+    <div class="field is-horizontal">
+        <div class="field-label is-normal">
+            {{ transient_form.number_of_zero_fills.label(class="label") }}
+        </div>
+        <div class="field-body">
+            <div class="field">
+                <div class="control">
+                    {{ transient_form.number_of_zero_fills(class="input",  type="number", min="0") }}  
+                </div>
+            </div>
+        </div>
+    </div> 
+    
+    <div class="field is-horizontal">
+        <div class="field-label">
+            <!-- Left empty for spacing -->
+        </div>
+        <div class="field-body">
+            <div class="field">
+            <div class="control">
+                {{ transient_form.submittransient(class="button is-block is-info is-medium is-fullwidth ftmsSettingsSubmit") }}
+            </div>
+            </div>
+        </div>
+    </div>
+
+</form>
+
+{% endblock %}

@@ -1,0 +1,83 @@
+
+{% block content %}
+
+<br>
+
+<table id="gcmsDataTable" class="table is-fullwidth  is-hoverable">
+    <thead>
+      <tr id="gcmsDataTableNav" class="is-hidden">
+        <td>
+          <a title="Delete Selected" class="removeSelectedGcmsData" onClick="removeSelectedGcmsData()" >
+            
+            <span class="icon is-medium">
+              <i class="fa fa-minus-circle" aria-hidden="true"></i>
+            </span>
+          </a>
+          <a title="Download Selected" class="downloadSelectedGcmsData" onClick="downloadSelectedGcmsData( )" >
+           
+            <span class="icon is-medium">
+              <i class="fa fa-download" aria-hidden="true"></i>
+            </span>
+          </a>
+        </td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <th>Name</th>
+        <th><abbr title="Type of File">Kind</abbr></th>
+        <th><abbr title="Upload Date">Date</abbr></th>
+        <th><abbr title="Data Identifier">ID</abbr></th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tfoot>
+      <tr>
+        <th>Name</th>
+        <th><abbr title="Type of File">Kind</abbr></th>
+        <th><abbr title="Upload Date">Date</abbr></th>
+        <th><abbr title="Data Identifier">ID</abbr></th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </tfoot>
+    <tbody>
+      {% for data in gcms_data%}
+      <tr style="word-wrap:break-word;" id="{{ data.id }}">
+            <td >{{ data.name }}{{ data.modifier }}</td>
+            <td >{{ data.suffix}} ) / {{ data.filetype }}</td>
+            <td >{{ data.pst_time_stamp }}</td>
+            <td >{{data.id}}</td>
+            <td><a title="Download Data" ,="" class="download_gcms_data" href="{{ url_for('gcms.download_data', id=data.id) }}">
+                <span class="icon">
+                <i class="fa fa-download" aria-hidden="true"></i>
+                </span>
+                </a>
+            </td>
+            <td><a title="Delete Data" class="remove_gcms_data" onClick="removeGcmsData('{{ url_for('gcms.remove_data', id=data.id) }}' )" >
+                    <span class="icon">
+                    <i class="fa fa-minus-circle" aria-hidden="true"></i>
+                    </span>
+                </a>
+            </td>
+            <td><a title="Open Data" class="open_gcms_data" id="{{ data.id }}" onClick="openGCMSDataResultsModal('{{ url_for('gcms.load_data_modal', id=data.id) }}')">
+              <span class="icon is-small">
+                  <i class="fas fa-external-link-alt"></i>
+              </span>
+            </button>
+          </td>
+          
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+{% endblock %}

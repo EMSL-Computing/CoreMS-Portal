@@ -1,0 +1,37 @@
+{% block content %}
+
+<div class="box is-radiusless is-shadowless"> 
+    
+    <form id="gcmsupload", method=POST enctype=multipart/form-data action="{{ url_for('gcms.upload') }}">
+        {{ gcms_upload_form.hidden_tag() }}
+        <div class="field">
+            <div class="control">
+                {{ gcms_upload_form.gcms_files.label }}
+                {{ gcms_upload_form.gcms_files(class="input is-medium",  accept=".cdf") }}
+            </div>
+        </div>
+        <div class="field">
+            <div class="control">
+                {{ gcms_upload_form.gcms_cal_ref_file.label(class="file-label") }}
+                {{ gcms_upload_form.gcms_cal_ref_file(class="input is-medium",  accept=".cdf") }}
+            </div>
+        </div>
+        <div class="field">
+            <div class="control">
+                {{ gcms_upload_form.gcms_blank_file.label(class="file-label") }}
+                {{ gcms_upload_form.gcms_blank_file(class="input is-medium",  accept=".cdf") }}
+            </div>
+        </div>
+        
+        {{ gcms_upload_form.gcms_upload_submit(class="button is-block is-info is-medium is-fullwidth") }}
+        <div class="control mt-4">
+            <div id="gcmsProgressBar" class="progress" data-label="0% Complete">
+                <span id="gcmsValueProgress" class="value" style="width:0%;"></span>
+            </div>
+        </div>
+        <p>
+
+    </form>
+    
+</div>
+{% endblock %}

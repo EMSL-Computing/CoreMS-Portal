@@ -1,0 +1,42 @@
+{% block content %}
+ 
+
+<div class="box is-radiusless is-shadowless"> 
+    
+    <form id=fticrms_form method='POST' action="/process_ftms" enctype=multipart/form-data>
+        {{ ftms_input_form.hidden_tag() }}
+        <div class="field">
+            <div class="control">
+                {{ ftms_input_form.cal_ref_file.label(class="file-label") }}
+                {{ ftms_input_form.cal_ref_file(class="input is-medium",  accept=".ref") }}
+            </div>
+            </label>
+        </div>
+
+        <div class="field">
+            <div class="control">
+                {{ ftms_input_form.files.label }}
+                {{ ftms_input_form.files(class="input is-medium",  accept=".txt, .d, .raw, .pks") }}
+            </div>
+        </div>
+
+        <div class="field">
+            <div class="control">
+                {{ ftms_input_form.outfilename(class="input is-medium", placeholder="Output Group Name") }}
+            </div>
+        </div>
+        {{ ftms_input_form.submit(class="button is-block is-info is-medium is-fullwidth") }}
+        <br>
+    </form>
+    <div class="control">
+        <progress id="workflow_progress" class="progress is-info is-medium" value="0" max="100"></progress>
+    </div>
+    
+    <p>
+        
+    </p>
+
+</div>
+        
+    
+{% endblock %}

@@ -1,0 +1,54 @@
+{% block content %}
+        
+<form id="gcmsPreset" method="POST">
+      <h3 class="subtitle">
+        Settings Presets
+    </h3>    
+    <div class="field">
+        {{ gcms_presets_form.gcms_presets.label(class="label") }}
+        <div class="columns is-vcentered">
+          <div class="column">
+            <div class="control">
+              <div class="select is-fullwidth">
+                {{ gcms_presets_form.gcms_presets(class="select", onchange="UpdateAllGcmsFormData(this.value)") }}
+              </div>
+            </div>
+          </div>
+          <div class="column is-1">
+            <a title="Delete Preset", id="delete_gcms_preset" class='delete_gcms_preset' href='#'>
+              <span class="icon">
+              <i class="fa fa-minus-circle" aria-hidden="true"></i>
+              </span>
+            </a>
+          </div>
+          
+        </div>
+
+    </div> 
+    
+    <div class="field">
+      {{ gcms_presets_form.new_gcms_preset_name.label(class="label") }}
+      <div class="columns is-vcentered">
+        <div class="column">
+          <div class="control">
+            <div class="is-fullwidth">
+              {{ gcms_presets_form.new_gcms_preset_name(class="input", placeholder="New Preset Name") }}
+            </div>
+          </div>
+        </div>
+        <div class="column is-1">
+          <a title="Save Preset", id="add_gcms_preset" class='add_preset' href='#'>
+            <span class="icon">
+            <i class="fa fa-plus-circle" aria-hidden="true"></i>
+            </span>
+          </a>
+        </div>
+        
+      </div>
+
+  </div> 
+
+    
+   </form>
+
+{% endblock %}

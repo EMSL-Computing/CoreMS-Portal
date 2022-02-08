@@ -1,0 +1,256 @@
+{% block content %}
+
+<form class="ftmssettings" id="ftmsadvancedsettings" onsubmit="updateFtmsFormData(this.id)" method="post">
+    <h3 class="subtitle">
+        Molecular Search Settings
+    </h3>    
+    <h5 class='subtitle is-small is-5'>Filters: </h5>
+
+    <div class="field ">
+        <div class="control">
+            <label class="checkbox">
+            {{ advanced_form.use_runtime_kendrick_filter() }}
+            {{ advanced_form.use_runtime_kendrick_filter.label }}
+            </label>
+        </div>
+    </div>
+    
+    <div class="columns">
+        <div class="column is-3">
+                <div class="control">
+                    <label class="checkbox">
+                    {{ advanced_form.use_min_peaks_filter() }}
+                    {{ advanced_form.use_min_peaks_filter.label }}
+                    </label>
+                </div>
+        </div>
+        <div class="column">
+                <div class="control">
+                    {{ advanced_form.min_peaks_per_class(class="input", type="number", min="0") }}
+                </div>
+            
+        </div>
+    </div>
+
+    <div class="columns">
+        <div class="column is-3">
+            <div class="field">
+                <div class="control">
+                    <label class="checkbox">
+                    {{ advanced_form.use_isotopologue_filter() }}
+                    {{ advanced_form.use_isotopologue_filter.label }}
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="column is-3">
+            <div class="field is-horizontal">
+                {{ advanced_form.isotopologue_filter_atoms.label() }}
+                &nbsp
+                <div class="control">
+                    <label class="checkbox">
+                    {% for subfield in advanced_form.isotopologue_filter_atoms %}
+                        <tr>
+                            <td>{{ subfield }}</td>
+                            <td>{{ subfield.label }}</td>
+                        </tr>
+                    {% endfor %}
+                    </label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="column">
+                <div class="control">
+                    {{ advanced_form.isotopologue_filter_threshold.label }}  
+                    {{ advanced_form.isotopologue_filter_threshold(class="input",  step='0.01', type="number", min="0") }}
+                </div>
+        </div>
+    </div>
+
+    <div class="field is-horizontal">
+        <div class="field is-grouped">
+            <div class="field-label is-normal">
+                <label class="label">HC:&nbsp </label>             
+            </div> 
+            <p class="control is-expanded">
+                <div class="field is-horizontal">
+                    <div class="field-label is-normal">
+                        Min
+                    </div>
+                    <div class="field-body">
+                        <div class="field">
+                            <div class="control is-expanded">
+                                {{ advanced_form.min_hc_filter(class="input ", step='0.001', type="number", min="0") }}
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+            </p>
+            <p class="control is-expanded">
+                <div class="field is-horizontal">
+                    <div class="field-label is-normal">
+                        Max
+                    </div>
+                    <div class="field-body">
+                        <div class="field">
+                            <div class="control is-expanded">
+                                {{ advanced_form.max_hc_filter(class="input", step='0.001', type="number", min="0") }}
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+            </p>
+        </div>
+        </div>
+
+        <div class="field is-horizontal">
+        <div class="field is-grouped">
+            <div class="field-label is-normal">
+                <label class="label"> O/C: </label>
+            </div>
+            <p class="control is-expanded">
+                <div class="field is-horizontal">
+                    <div class="field-label is-normal">
+                        Min
+                    </div>
+                    <div class="field-body">
+                        <div class="field">
+                            <div class="control is-expanded">
+                                {{ advanced_form.min_oc_filter(class="input", step='0.001', type="number", min="0") }}
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+            </p>
+            <p class="control is-expanded">
+                <div class="field is-horizontal">
+                    <div class="field-label is-normal">
+                        Max
+                    </div>
+                    <div class="field-body">
+                        <div class="field">
+                            <div class="control is-expanded">
+                                {{ advanced_form.max_oc_filter(class="input", step='0.001', type="number", min="0") }}
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+            </p>
+        </div>
+
+    </div>
+
+    <h5 class='subtitle is-small is-5'>Assignment: </h5>
+    
+    <div class="field">
+        {{ advanced_form.score_method.label(class="label is-left") }}  
+        <div class="control">
+            <div class="select is-fullwidth">
+                {{ advanced_form.score_method(class="select") }}
+            </div>
+        </div>
+    </div>
+    
+    <div class="field">
+        {{ advanced_form.error_method.label(class="label is-left") }}  
+        <div class="control">
+            <div class="select is-fullwidth">
+                {{ advanced_form.error_method(class="select") }}
+            </div>
+        </div>
+    </div>
+
+    <div class="field is-horizontal">
+        <div class="field is-grouped">
+            <div class="field-label is-normal">
+                <label class="label">Error m/z </label>             
+            </div> 
+            <p class="control is-expanded">
+                <div class="field is-horizontal">
+                    <div class="field-label is-normal">
+                        Range
+                    </div>
+                    <div class="field-body">
+                        <div class="field">
+                            <div class="control is-expanded">
+                                {{ advanced_form.mz_error_range(class="input",  step='0.001', type="number", min="0") }}
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+            </p>
+            <p class="control is-expanded">
+                <div class="field is-horizontal">
+                    <div class="field-label is-normal">
+                        Avr
+                    </div>
+                    <div class="field-body">
+                        <div class="field">
+                            <div class="control is-expanded">
+                                {{ advanced_form.mz_error_average(class="input", step='0.001', type="number") }}
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+            </p>
+        </div>
+        </div>
+        
+        <div class="field is-horizontal">
+            <div class="field is-grouped">
+                <div class="field-label is-normal">
+                    <label class="label">Abund Err </label>             
+                </div> 
+                <p class="control is-expanded">
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            Min
+                        </div>
+                        <div class="field-body">
+                            <div class="field">
+                                <div class="control is-expanded">
+                                    {{ advanced_form.min_abun_error(class="input", step='0.001', type="number") }}
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                </p>
+                <p class="control is-expanded">
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            Max
+                        </div>
+                        <div class="field-body">
+                            <div class="field">
+                                <div class="control is-expanded">
+                                    {{ advanced_form.max_abun_error(class="input", step='0.001', type="number") }}
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                </p>
+            </div>
+            </div>
+
+    <br>    
+    <div class="field is-horizontal">
+        <div class="field-label">
+            <!-- Left empty for spacing -->
+        </div>
+        <div class="field-body">
+            <div class="field">
+            <div class="control">
+                {{ advanced_form.submitAdvanced(class="button is-block is-info is-medium is-fullwidth ftmsSettingsSubmit") }}
+            </div>
+            </div>
+        </div>
+    </div>    
+
+</form>
+
+{% if advanced_form.errors %}
+        {{ advanced_form.errors }}
+{% endif %}
+
+{% endblock %}

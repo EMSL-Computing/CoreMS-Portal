@@ -1,0 +1,85 @@
+
+{% block content %}
+<br>
+
+<table id="ftmsDataTable"class="table is-fullwidth  is-hoverable display">
+    
+    <thead>
+      <tr id="ftmsDataTableNav" class="is-hidden">
+        <td>
+          <a title="Delete Selected" class="removeSelectedFtmsData" onClick="removeSelectedFtmsData()" >
+            
+            <span class="icon is-medium">
+              <i class="fa fa-minus-circle" aria-hidden="true"></i>
+            </span>
+          </a>
+          <a title="Download Selected" class="downloadSelectedFtmsData" onClick="downloadSelectedFtmsData( )" >
+           
+            <span class="icon is-medium">
+              <i class="fa fa-download" aria-hidden="true"></i>
+            </span>
+          </a>
+        </td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <th>Name</th>
+        <th><abbr title="Type of File">Kind</abbr></th>
+        <th><abbr title="Upload Date">Date</abbr></th>
+        <th><abbr title="Data Identifier">ID</abbr></th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tfoot>
+      <tr>
+        <th>Name</th>
+        <th><abbr title="Type of File">Kind</abbr></th>
+        <th><abbr title="Upload Date">Date</abbr></th>
+        <th><abbr title="Data Identifier">ID</abbr></th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </tfoot>
+    
+    <tbody>
+      
+      {% for data in ftms_data%}
+        <tr style="word-wrap:break-word;" id="{{ data.id }}">
+            <td style="word-wrap:break-word;" >{{ data.name }}{{ data.modifier }} </td>
+            <td >({{ data.suffix}} ) / {{ data.filetype }}</td>
+            <td >{{ data.pst_time_stamp }}</td>
+            <td >{{data.id}}</td>
+            <td><a title="Download Data" ,="" class="download_ftms_data" href="{{ url_for('fticrms.download_data', id=data.id) }}">
+                <span class="icon">
+                <i class="fa fa-download" aria-hidden="true"></i>
+                </span>
+                </a>
+            </td>
+            <td><a title="Delete Data" class="remove_ftms_data" onClick="removeFtmsData('{{ url_for('fticrms.remove_data', id=data.id) }}' )" >
+                    <span class="icon">
+                    <i class="fa fa-minus-circle" aria-hidden="true"></i>
+                    </span>
+                </a>
+            </td>
+            <td><a title="Open Data" class="open_ftms_data" id="{{ data.id }}" onClick="openDataResultsModal('{{ '/ftms/load_data_modal/' + data.id|string }}')">
+              <span class="icon is-small">
+                  <i class="fas fa-external-link-alt"></i>
+              </span>
+            </button>
+          </td>
+          
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+{% endblock %}

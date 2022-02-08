@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    
+    <title>CoreMS</title>
+    
+    <!-- External CSS -->
+    <link href="/static/bulma/bulma.min.css" rel="stylesheet"> 
+    <link href="/static/fontawesome-free-5.14.0-web/css/all.css" rel="stylesheet">
+    <link href="/static/css/select2.min.css" rel="stylesheet">
+    <link href="/static/datatables/css/dataTables.bulma.min.css" rel="stylesheet">
+    
+    <!-- External JS -->
+    <script type="text/javascript" src="/static/jquery/jquery.3.5.1-min.js"></script>
+    <script type="text/javascript" src="/static/jquery/jquery-ui.1.12.1.js"></script>
+    <script type="text/javascript" src="/static/bokeh/bokeh-2.0.2.min.js"></script>
+    <script type="text/javascript" src="/static/bokeh/bokeh-widgets-2.0.2.min.js"></script>
+    <script type="text/javascript" src="/static/bokeh/bokeh-tables-2.0.2.min.js"></script>
+    <script type="text/javascript" src="/static/jquery/js.cookie.min.js"></script>
+    <script type="text/javascript" src="/static/jquery/select2.min.js"></script>
+    <script type="text/javascript"  src="/static/jquery/select2.min.js"></script>
+    
+    <script type="text/javascript" src="/static/jquery/jquery.dataTables.min.js"></script>
+    <script type="text/javascript"  src="/static/datatables/js/dataTables.bulma.js"></script>
+    
+    
+    <!-- Internal CSS -->
+    <link rel="stylesheet" href="/static/css/corems.css">
+    <link rel="stylesheet" href="/static/css/jquery-ui.css">
+    
+    <!-- Internal JS -->
+    <script type="text/javascript" src="/static/js/corems.js?{{ current_version }}"></script>
+
+    <script type="text/javascript" src="/static/js/ftms/add_atoms.js?{{ current_version }}"></script>
+    <script type="text/javascript" src="/static/js/ftms/ftms_parameters.js?{{ current_version }}"></script>
+    <script type="text/javascript" src="/static/js/ftms/ftms_search.js?{{ current_version }}"></script>
+    <script type="text/javascript" src="/static/js/ftms/ftms_upload.js?{{ current_version }}"></script>
+    <script type="text/javascript" src="/static/js/ftms/ftms_tabs.js?{{ current_version }}"></script>
+    <script type="text/javascript" src="/static/js/ftms/ftms_data.js?{{ current_version }}"></script>
+    <script type="text/javascript" src="/static/js/ftms/ftms_results.js?{{ current_version }}"></script>
+
+    <script type="text/javascript" src="/static/js/gcms/gcms_upload.js?{{ current_version }}"></script>
+    <script type="text/javascript" src="/static/js/gcms/gcms_tabs.js?{{ current_version }}"></script>
+    <script type="text/javascript" src="/static/js/gcms/gcms_data.js?{{ current_version }}"></script>
+    <script type="text/javascript" src="/static/js/gcms/gcms_results.js?{{ current_version }}"></script>
+    <script type="text/javascript" src="/static/js/gcms/gcms_search.js?{{ current_version }}"></script>
+    <script type="text/javascript" src="/static/js/gcms/gcms_parameters.js?{{ current_version }}"></script>
+    
+
+
+</head>
+
+<body>
+  
+  <section class="hero">
+   
+    <div class="hero-head ">
+      <nav class="navbar is-fixed-top has-background-white" role="navigation" aria-label="main navigation">
+          <div class="navbar-brand">
+            <a class="navbar-item" href="{{ url_for('main.index') }}">
+              <img src="/static/images/emsl_logo_home.jpeg" >
+            </a>
+        
+            <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="main-nav" onclick="document.getElementById('main-nav').classList.toggle('is-active');">
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+            </a>
+          </div>
+        
+          <div id="main-nav" class="navbar-menu">
+            <div class="navbar-start">
+              {% if current_user.is_authenticated %}
+              <a href="{{ url_for('main.index') }}" class="navbar-item">
+                Home
+              </a>
+              <a href="{{ url_for('main.profile') }}" class="navbar-item">
+                Profile
+              </a>
+              
+              <div class="navbar-item has-dropdown is-hoverable">
+                <a class="navbar-link">
+                  Workflows
+                </a>
+                
+                <div class="navbar-dropdown">
+                  <p class="navbar-item has-text-weight-bold">
+                    NOM
+                  </p>
+                  <a href="{{ url_for('fticrms.fticrms_page') }}" class="navbar-item">
+                    DI FT-ICR MS
+                  </a>
+                  <!--
+                  <a class="navbar-item">
+                      LC FT-MS
+                  </a>
+                  -->
+                  <hr class="dropdown-divider">
+                  <p class="navbar-item has-text-weight-bold">
+                    Metabolomics
+                  </p>
+                  <a href="{{ url_for('gcms.gcms_page') }}" class="navbar-item">
+                    GC-MS
+                  </a>
+                  <!--
+                  <a class="navbar-item">
+                    LC-MS
+                  </a>
+                  -->
+                  
+                </div>
+              </div>
+              <a href="{{ url_for('main.help') }}" class="navbar-item">
+                Help
+              </a>
+              {% endif %}
+            </div>
+        
+            <div class="navbar-end">
+              <div class="navbar-item">
+                <div class="buttons">
+                  {% if current_user.is_authenticated %}
+                  <a href="{{ url_for('auth.logout') }}" class="button is-light">
+                      Logout
+                  </a>
+                  {% endif %}
+                  {% if not current_user.is_authenticated %}
+                  <a href="{{ url_for('auth.signup') }}" class="button is-primary">
+                    <strong>Sign up</strong>
+                  </a>
+                  <a href="{{ url_for('auth.login') }}", class="button is-light">
+                    Log in
+                  </a>
+                  {% endif %}    
+              </div>
+              </div>
+            </div>
+          </div>
+        </nav>
+    </div>
+      
+        <div class="hero-body has-background-light">
+          
+          {% if current_user.is_authenticated %}
+            <div class="tile is-ancestor mt-4 "style="min-height: 85vh;">
+              <div class="tile is-3 is-vertical is-parent">
+                <div class="tile is-child box">
+                  
+                  <div class="left_nav_content">
+                    <p class="subtitle">Workflows</p>
+                    <aside class="menu left_nav">
+                      <p class="menu-label">
+                        NOM Workflows
+                      </p>
+                      <ul class="menu-list">
+                        <li>
+                          <a href="{{ url_for('fticrms.fticrms_page') }}">
+                            DI FT-ICR MS 
+                          </a>
+                        </li>
+                        <!--
+                        <li>
+                          <a href="#">
+                            LC FT-ICR MS
+                          </a>
+                        </li>
+                        -->
+                      </ul>
+                      <p class="menu-label">
+                        Metabolomics
+                      </p>
+                      <ul class="menu-list">
+                        <li>
+                          <a href="{{ url_for('gcms.gcms_page') }}">
+                            GC-MS
+                          </a>
+                        </li>
+                        <!--
+                        <li>
+                          <a href="#">
+                            LC-MS
+                          </a>
+                        </li>
+                        
+                        <li>
+                          <a href="#">
+                            DI FT-ICR MS
+                          </a>
+                        </li>
+                        -->
+                      </ul>
+                    </aside>
+                  </div>
+                </div>
+                
+                
+              </div>
+              <div class="tile is-parent">
+                <div class="tile is-child box" >
+                    <div class="container is-fluid"> 
+                      {% block content %}
+                      {% endblock %}
+                    </div>
+                </div>
+              </div>
+            </div>
+          {% endif %}
+          {% if not current_user.is_authenticated %}   
+            {{ self.content()}}
+          {% endif %}  
+        </div>
+        
+      <footer class="hero-foot">
+          <div class="container">
+            <div class="content has-text-centered">
+              <p>Copyright PNNL and Battelle Memorial Institute, All Rights Reserved</p>
+            </div>
+          </div>
+        </footer>
+    </section>
+    
+    <div class="plot container"></div>
+
+    <div class="spin container">
+      <div id='progress' class="modal">
+        <div class="modal-background"></div>
+        <div class="modal-content"style="height: 160px; width: 160px;">
+            <div class="loader"></div>
+        </div>
+        <button id="modal-close", class="modal-close is-large" aria-label="close"></button>
+      </div>
+    </div>
+</body>
+
+</html>
+

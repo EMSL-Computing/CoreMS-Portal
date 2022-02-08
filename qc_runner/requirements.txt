@@ -1,0 +1,7 @@
+corems>=1.0.0
+celery[redis]
+sqlalchemy
+werkzeug
+flower
+minio
+s3path

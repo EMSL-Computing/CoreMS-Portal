@@ -1,0 +1,55 @@
+{% block content %}
+
+<div class="box is-radiusless is-shadowless"> 
+  <div class="columns has-background-white"> 
+    
+    <div class="column is-3">
+      <aside class="menu gcms-param_nav sticky">
+        <ul class="menu-list">
+          <li>
+            <a id="gcmspreset-tab" onClick="switchToGcmsPreset()">
+              Presets
+            </a>
+          </li>
+        </ul>
+        <ul class="menu-list">
+          <li>
+            <a id="gcmsmolsearch-tab" onClick="switchToGcmsMolSearch()">
+              Basic 
+            </a>
+          </li>
+        </ul>
+        <ul class="menu-list">
+          <li>
+            <a id="gcmspeakdetection-tab" onClick="switchToGcmsPeakDetection()">
+              Advanced 
+            </a>
+          </li>
+        </ul>
+      </aside>
+    </div>
+      
+    <div class="column is-9">
+      
+      <div  id="gcmspreset-tab-content">
+        <div class = "box">
+          {% include 'workflows/gcms/parameter/gcms_parameter_preset.html' %}
+        </div>
+      </div>
+      
+      <div  id="gcmsmolsearch-tab-content">
+        <div class = "box">
+          {% include 'workflows/gcms/parameter/gcms_molecular_search.html' %}
+        </div>
+      </div>
+
+      <div  id="gcmspeakdetection-tab-content">
+        <div class = "box">
+          {% include 'workflows/gcms/parameter/gcms_peak_detection.html' %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}  

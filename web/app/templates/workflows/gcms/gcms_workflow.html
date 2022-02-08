@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+<div class="gcms-tabs tabs mb-0">
+    <ul>
+      <li class="is-active" id="gcmsinput-tab">
+        <a onClick="switchToGcmsInput()">
+          <span class="icon is-small"><i class="fas fa-file-alt" aria-hidden="true"></i></span>
+          <span>Data Upload</span>
+        </a>
+      </li>
+      <li id="gcmsdata-tab">
+        <a onClick="switchToGcmsData()">
+          <span class="icon is-small"><i class="fas fa-database" aria-hidden="true"></i></span>
+          <span>Data</span>
+        </a>
+      </li>
+      <li id="gcmsparams-tab">
+        <a onClick="switchToGcmsSettings()">
+          <span class="icon is-small"><i class="fas fa-cogs" aria-hidden="true"></i></span>
+          <span>Settings</span>
+        </a>
+      </li>
+      <li class="" id="gcmsprocess-tab">
+        <a onClick="switchToGcmsProcess()">
+          <span class="icon is-small"><i class="fas fa-hammer" aria-hidden="true"></i></span>
+          <span>Process</span>
+        </a>
+      </li>
+      <li id="gcmsresult-tab">
+        <a onClick="switchToGcmsResult()">
+          <span class="icon is-small"><i class="fas fa-chart-bar" aria-hidden="true"></i></span>
+          <span>Results</span>
+        </a>
+      </li>
+    </ul>
+</div>
+
+    <div id="gcmsinput-tab-content" >
+        {% include 'workflows/gcms/gcms_file_upload.html' %}
+    </div>
+    <div id="gcmsdata-tab-content" style="height: 80vh; overflow: auto;">
+        {% include 'workflows/gcms/gcms_manage_data.html' %}
+    </div>
+     <div id="gcmsparams-tab-content"  style="height: 80vh; overflow: auto;">
+        {% include 'workflows/gcms/parameter/gcms_parameter.html' %}
+    </div>
+     <div id="gcmsprocess-tab-content"  style="height: 80vh; overflow: auto;">
+        {% include 'workflows/gcms/gcms_process.html' %}
+    </div>
+     <div id="gcmsresult-tab-content"  style="height: 80vh; overflow: auto;">
+        {% include 'workflows/gcms/gcms_results.html' %}
+    </div>
+    
+{% endblock %}  

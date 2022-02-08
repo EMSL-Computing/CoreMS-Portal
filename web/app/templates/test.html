@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+   
+    <title>CoreMS</title>
+    
+    <!-- External CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
+    
+    <!-- External JS -->
+    <script src="https://cdn.pydata.org/bokeh/release/bokeh-2.0.2.min.js"></script>
+    <script src="https://cdn.bokeh.org/bokeh/release/bokeh-widgets-2.0.2.min.js"></script>
+    <script src="https://cdn.bokeh.org/bokeh/release/bokeh-tables-2.0.2.min.js"></script>
+    <script src="https://kit.fontawesome.com/fd211a3865.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapp..com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
+    
+    <!-- Internal CSS -->
+    <link rel="stylesheet" href="static/css/corems.css">
+    
+    <!-- Internal JS -->
+    <script type="text/javascript" src="static/js/add_atoms.js"></script>
+    <script type="text/javascript" src="static/js/corems.js"></script>
+
+</head>
+
+<body>
+
+  
+      <nav class="navbar is-fixed-top has-background-white" role="navigation" aria-label="main navigation">
+          <div class="navbar-brand">
+            <a class="navbar-item" href="{{ url_for('main.index') }}">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/2/25/Emsl_logo_home.jpg" >
+            </a>
+        
+            <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="main-nav" onclick="document.getElementById('main-nav').classList.toggle('is-active');">
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+            </a>
+          </div>
+        
+          <div id="main-nav" class="navbar-menu">
+            <div class="navbar-start">
+              {% if current_user.is_authenticated %}
+              <a href="{{ url_for('main.index') }}" class="navbar-item">
+                Home
+              </a>
+              {% endif %}
+              {% if current_user.is_authenticated %}
+              <a href="{{ url_for('main.profile') }}" class="navbar-item">
+                Profile
+              </a>
+              {% endif %}
+              {% if current_user.is_authenticated %}
+              <div class="navbar-item has-dropdown is-hoverable">
+                <a class="navbar-link">
+                  Workflows
+                </a>
+        
+                <div class="navbar-dropdown">
+                  <a href="{{ url_for('gcms.gcms_page') }}" class="navbar-item">
+                      GC-MS Workflow
+                  </a>
+                  <a href="{{ url_for('fticrms.fticrms_page') }}" class="navbar-item">
+                    FT-ICR MS Workflow
+                  </a>
+                  <a class="navbar-item">
+                      LC-MS Workflow
+                  </a>
+                  <hr class="navbar-divider">
+                  <a class="navbar-item">
+                    Help
+                  </a>
+                </div>
+              </div>
+              {% endif %}
+            </div>
+        
+            <div class="navbar-end">
+              <div class="navbar-item">
+                <div class="buttons">
+                  {% if current_user.is_authenticated %}
+                  <a href="{{ url_for('auth.logout') }}" class="button is-light">
+                      Logout
+                  </a>
+                  {% endif %}
+                  {% if not current_user.is_authenticated %}
+                  <a href="{{ url_for('auth.signup') }}" class="button is-primary">
+                    <strong>Sign up</strong>
+                  </a>
+                  <a href="{{ url_for('auth.login') }}", class="button is-light">
+                    Log in
+                  </a>
+                  {% endif %}    
+              </div>
+              </div>
+            </div>
+          </div>
+        </nav>
+    
+      
+        <div class="content">
+            
+            <style>
+                .wrap {
+                    display: flex;
+                    }
+
+                    .left {
+                    background: red;
+                    flex-basis: 20%;
+                    }
+
+                    .right {
+                    background: green;
+                    flex-basis: 80%;
+                    
+                    height: 80vh; 
+                    overflow: auto;
+                    }
+              </style>
+          
+          <div class="wrap pt-4 mt-4">
+            <div class="left">
+              <h1>Not scrollable content</h1>
+            </div>
+            <div class="right">
+              <div>
+                Very long content
+              </div>
+            </div>
+          </div>
+          
+        </div>
+    
+      <footer class="hero-foot">
+          <div class="container ">
+            <div class="content has-text-centered">
+              <p>Copyright PNNL and Battelle Memorial Institute, All Rights Reserved</p>
+            </div>
+          </div>
+        </footer>
+    
+</body>
+
+</html>
+

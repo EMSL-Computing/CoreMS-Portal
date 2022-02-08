@@ -1,0 +1,107 @@
+{% block content %}
+
+<div class="box is-radiusless is-shadowless"> 
+  <div class="columns has-background-white"> 
+    
+    <div class="column is-3">
+      <aside class="menu ftms-param_nav sticky">
+        <ul class="menu-list">
+          <li>
+            <a id="ftmspreset-tab" onClick="switchToFtmsPreset()">
+              Presets
+            </a>
+          </li>
+        </ul>
+        <p class="menu-label">
+          Basic
+        </p>
+        <ul class="menu-list">
+          <li>
+            <a id="ftmsbasic-tab" onClick="switchToFtmsBasic()">
+              Molecular Formula
+            </a>
+          </li>
+        </ul>
+        <p class="menu-label">
+          Advanced
+        </p>
+        <ul class="menu-list">
+          <li>
+            <a id="ftmsinputdata-tab" onClick="switchToFtmsInputData()">
+              Input Data
+            </a>
+          </li>
+          <li>
+          <li>
+            <a id="ftmsmolsearch-tab" onClick="switchToFtmsMolSearch()">
+              Molecular Formula
+            </a>
+          </li>
+          <li>
+            <a id="ftmsmssettings-tab" onClick="switchToFtmsmSettings()">
+              Mass Spectrum
+            </a>
+          </li  >
+          <li>
+            <a id="ftmsmspeak-tab" onClick="switchToFtmsMsPeak()">
+              MS Peak
+            </a>
+          </li>
+          <li >
+            <a id="transient-tab" onClick="switchToTransient()">
+              Transient
+            </a>
+          </li>
+        </ul>
+      </aside>
+    </div>
+      
+    <div class="column is-9">
+      
+      <div  id="ftmspreset-tab-content">
+        <div class = "box">
+        {% include 'workflows/fticr/parameter_preset.html' %}
+        </div>
+      </div>  
+      
+      <div  id="ftmsbasic-tab-content">
+        <div class = "box">
+        {% include 'workflows/fticr/basic_form.html' %}
+        </div>
+      </div>  
+      
+      <div id="ftmsmolsearch-tab-content">
+        <div class = "box">
+          {% include 'workflows/fticr/advanced_form.html' %}
+        </div>
+      </div>
+      <div id="ftmsinputdata-tab-content">
+      
+          <div class = "box">
+            {% include 'workflows/fticr/input_data_form.html' %}
+          </div>
+        </div>
+        
+        <div id="ftmsmssettings-tab-content">
+          <div class = "box">
+          {% include 'workflows/fticr/ms_form.html' %}
+          </div>  
+        </div>
+        
+        <div id="ftmsmspeak-tab-content">
+          <div class = "box">
+          {% include 'workflows/fticr/ms_peak_form.html' %}
+          </div>  
+        </div>
+        
+        <div id="transient-tab-content">
+          <div class = "box">
+          {% include 'workflows/fticr/transient_form.html' %}
+          </div>  
+        </div>
+      </div>
+    </div>
+
+</div>
+
+{% endblock %}  

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+{{ js_resources|indent(4)|safe }}
+
+<div>
+<div class="card">
+    <header class="card-header">
+      <p class="card-header-title">
+        <strong>Dataset Name: </strong> {{ out_filename }}
+      </p>
+      <a href="{{ down_href }}" class="card-header-icon" aria-label="more options" title="Save Dataset {{ out_filename }} Results ">
+        <span class="icon">
+          <i class="fas fa-save" aria-hidden="true"></i>
+        </span>
+      </a>
+    </header>
+    <div class="card-content">
+      <div class="content " style="min-height: 70vh; overflow: auto;">
+        {% for plot_script, plot_div in script_list%}
+            {{ plot_script|indent(4)|safe }}
+            {{ plot_div|indent(4)|safe }}
+           
+        {%endfor%} 
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,628 @@
+{% block content %}
+
+<form class="ftmssettings" id="ftmsbasicsettings" onsubmit="updateFtmsFormData(this.id)" method="post">
+    <h3 class="subtitle">
+        Molecular Search Settings
+    </h3>
+    <div class="field is-horizontal">
+        <div class="control">
+            <label class="checkbox">
+                {{ basic_form.ion_charge.label() }}
+                {% for subfield in basic_form.ion_charge %}
+                <tr>
+                    <td>{{ subfield(class="radio") }}</td>
+                    <td>{{ subfield.label }}</td>
+                </tr>
+                {% endfor %}
+            </label>
+        </div>
+    </div>
+    <hr>
+    <div class="field ">
+        <div class="control">
+            <label class="checkbox">
+                {{ basic_form.use_pah_line_rule }}
+                {{ basic_form.use_pah_line_rule.label }}
+            </label>
+        </div>
+    </div>
+
+    <div class="field is-horizontal is-fullwidth">
+        <div class="field is-grouped is-fullwidth">
+            <div class="field-label is-normal">
+                <label class="label">DBE: </label>
+            </div>
+            <p class="control">
+            <div class="field is-horizontal">
+                <div class="field-label is-normal">
+                    Min
+                </div>
+                <div class="field-body">
+                    <div class="field">
+                        <div class="control is-expanded">
+                            {{ basic_form.min_dbe(class="input", type="number",  min="0", max="100") }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </p>
+            <p class="control is-expanded">
+            <div class="field is-horizontal">
+                <div class="field-label is-normal">
+                    Max
+                </div>
+                <div class="field-body">
+                    <div class="field">
+                        <div class="control is-expanded">
+                            {{ basic_form.max_dbe(class="input", type="number", min="0", max="100") }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </p>
+        </div>
+    </div>
+    <hr>
+    <div class="field is-horizontal">
+        <label class="label">Ion Type:&nbsp</label>
+
+        <div class="control">
+            <label class="checkbox">
+
+                {{ basic_form.isProtonated() }}
+                {{ basic_form.isProtonated.label }}
+                {{ basic_form.isRadical() }}
+                {{ basic_form.isRadical.label }}
+                {{ basic_form.isAdduct() }}
+                {{ basic_form.isAdduct.label }}
+                <label>
+        </div>
+    </div>
+
+    <div class="field is-horizontal">
+        {{ basic_form.adduct_atoms_neg.label(class="label") }}
+        &nbsp
+        <div class="control">
+            <label class="checkbox">
+                {% for subfield in basic_form.adduct_atoms_neg %}
+                <tr>
+                    <td>{{ subfield }}</td>
+                    <td>{{ subfield.label }}</td>
+                </tr>
+                {% endfor %}
+            </label>
+        </div>
+    </div>
+
+    
+    <div class="field is-horizontal">
+        {{ basic_form.adduct_atoms_pos.label(class="label") }}
+        &nbsp
+        <div class="control">
+            <label class="checkbox">
+                {% for subfield in basic_form.adduct_atoms_pos %}
+                <tr>
+                    <td>{{ subfield }}</td>
+                    <td>{{ subfield.label }}</td>
+                </tr>
+                {% endfor %}
+            </label>
+        </div>
+    </div>
+    <hr>
+    <div class="field is-horizontal is-fullwidth">
+        <div class="field is-grouped is-fullwidth">
+            <div class="field-label is-normal">
+                <label class="label">Error: </label>
+            </div>
+            <p class="control">
+            <div class="field is-horizontal">
+                <div class="field-label is-normal">
+                    Min
+                </div>
+                <div class="field-body">
+                    <div class="field">
+                        <div class="control is-expanded">
+                            {{ basic_form.min_ppm_error(class="input", step='0.000001', type="number", min="-100", max="100") }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </p>
+            <p class="control is-expanded">
+            <div class="field is-horizontal">
+                <div class="field-label is-normal">
+                    Max
+                </div>
+                <div class="field-body">
+                    <div class="field">
+                        <div class="control is-expanded">
+                            {{ basic_form.max_ppm_error(class="input", step='0.000001', type="number", min="-100", max="100") }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </p>
+        </div>
+    </div>
+    <hr>
+   
+    <div class="field is-horizontal">        
+        <div class="field-label is-normal">
+            {{ basic_form.output_score_method.label(class="label") }}
+        </div>
+        <div class="field-body">
+            <div class="field">
+                <div class="control">
+                    <div class="select is-fullwidth">
+                        {{ basic_form.output_score_method(class="select") }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="field is-horizontal">        
+        <div class="field-label is-normal">
+            {{ basic_form.output_min_score.label(class="label") }}
+        </div>
+        <div class="field-body">
+            <div class="field">
+                <div class="control is-expanded">
+                    {{ basic_form.output_min_score(class="input", step='0.01', type="number", min="0", max="1") }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <label class='label'>Search Atoms:</label>
+    <a title="Add atom" , class='add_atoms' href='#'>
+        <span class="icon">
+            <i class="fa fa-plus-circle" aria-hidden="true"></i>
+        </span>
+        Add Atom
+    </a>
+    <div class="field-label is-normal">
+        <div class="columns is-mobile is-variable is-5">
+            <div class="column">
+                <label class="label"> Atom </label>
+            </div>
+            <div class="column">
+                <label class="label"> Min </label>
+            </div>
+            <div class="column">
+                <label class="label"> Max </label>
+            </div>
+            <div class="column">
+                <label class="label"> Covalence </label>
+            </div>
+            <div class="column is-1">
+                <label class="label"> </label>
+            </div>
+        </div>
+    </div>
+
+    <div id='usedAtoms-subfield-container'>
+
+        {% for subfield in basic_form.usedAtoms %}
+
+        <div id='usedAtoms-{{ loop.index0 }}' class='usedAtoms-subfield' data-index='{{ loop.index0 }}'>
+            <div class="columns is-mobile is-variable is-1">
+                <div class="column">{{subfield.atom(class='input search-input-ftmsbasic')}}</div>
+                <div class="column">{{subfield.min_count(class='input', type="number", min="0")}}</div>
+                <div class="column">{{subfield.max_count(class='input', type="number", min="0")}}</div>
+                <div class="column">{{subfield.atoms_valence(class='input', type="number", min="0", max="20")}}</div>
+
+                <div class="column is-1">
+                    <a title="Remove atom" , class='remove_atoms' href='#'>
+                        <span class="icon">
+                            <i class="fa fa-minus-circle" aria-hidden="true"></i>
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <br>
+    <div class="field is-horizontal">
+        <div class="field-label">
+            <!-- Left empty for spacing -->
+        </div>
+        <div class="field-body">
+            <div class="field">
+                <div class="control">
+                    {{ basic_form.submitBasic(class="button is-block is-info is-medium is-fullwidth") }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    {% if basic_form.errors %}
+    {{ basic_form.errors }}
+    {% endif %}
+
+    {# Form template #}
+    <div id="usedAtoms-_" class="usedAtoms-is-hidden" data-index="_">
+        <div class="columns is-mobile is-variable is-1">
+
+            <div class="column"><select class="input search-input-ftmsbasic" id="usedAtoms-_-atom"
+                    name="usedAtoms-_-atom">
+                    <option value="H">H</option>
+                    <option value="D">D</option>
+                    <option value="T">T</option>
+                    <option value="3He">3He</option>
+                    <option value="He">He</option>
+                    <option value="6Li">6Li</option>
+                    <option value="7Li">7Li</option>
+                    <option value="9Be">9Be</option>
+                    <option value="10B">10B</option>
+                    <option value="11B">11B</option>
+                    <option selected="" value="C">C</option>
+                    <option value="13C">13C</option>
+                    <option value="14C">14C</option>
+                    <option value="N">N</option>
+                    <option value="15N">15N</option>
+                    <option value="O">O</option>
+                    <option value="17O">17O</option>
+                    <option value="18O">18O</option>
+                    <option value="F">F</option>
+                    <option value="20Ne">20Ne</option>
+                    <option value="21Ne">21Ne</option>
+                    <option value="22Ne">22Ne</option>
+                    <option value="Na">Na</option>
+                    <option value="24Mg">24Mg</option>
+                    <option value="25Mg">25Mg</option>
+                    <option value="26Mg">26Mg</option>
+                    <option value="27Al">27Al</option>
+                    <option value="28Si">28Si</option>
+                    <option value="29Si">29Si</option>
+                    <option value="30Si">30Si</option>
+                    <option value="P">P</option>
+                    <option value="S">S</option>
+                    <option value="33S">33S</option>
+                    <option value="34S">34S</option>
+                    <option value="36S">36S</option>
+                    <option value="Cl">Cl</option>
+                    <option value="37Cl">37Cl</option>
+                    <option value="36Ar">36Ar</option>
+                    <option value="38Ar">38Ar</option>
+                    <option value="40Ar">40Ar</option>
+                    <option value="K">K</option>
+                    <option value="40K">40K</option>
+                    <option value="41K">41K</option>
+                    <option value="Ca">Ca</option>
+                    <option value="42Ca">42Ca</option>
+                    <option value="43Ca">43Ca</option>
+                    <option value="44Ca">44Ca</option>
+                    <option value="46Ca">46Ca</option>
+                    <option value="48Ca">48Ca</option>
+                    <option value="45Sc">45Sc</option>
+                    <option value="46Ti">46Ti</option>
+                    <option value="47Ti">47Ti</option>
+                    <option value="48Ti">48Ti</option>
+                    <option value="49Ti">49Ti</option>
+                    <option value="50Ti">50Ti</option>
+                    <option value="50V">50V</option>
+                    <option value="V">V</option>
+                    <option value="50Cr">50Cr</option>
+                    <option value="52Cr">52Cr</option>
+                    <option value="53Cr">53Cr</option>
+                    <option value="54Cr">54Cr</option>
+                    <option value="55Mn">55Mn</option>
+                    <option value="54Fe">54Fe</option>
+                    <option value="Fe">Fe</option>
+                    <option value="57Fe">57Fe</option>
+                    <option value="58Fe">58Fe</option>
+                    <option value="59Co">59Co</option>
+                    <option value="58Ni">58Ni</option>
+                    <option value="60Ni">60Ni</option>
+                    <option value="61Ni">61Ni</option>
+                    <option value="62Ni">62Ni</option>
+                    <option value="64Ni">64Ni</option>
+                    <option value="Cu">Cu</option>
+                    <option value="65Cu">65Cu</option>
+                    <option value="64Zn">64Zn</option>
+                    <option value="66Zn">66Zn</option>
+                    <option value="67Zn">67Zn</option>
+                    <option value="68Zn">68Zn</option>
+                    <option value="70Zn">70Zn</option>
+                    <option value="69Ga">69Ga</option>
+                    <option value="71Ga">71Ga</option>
+                    <option value="70Ge">70Ge</option>
+                    <option value="72Ge">72Ge</option>
+                    <option value="73Ge">73Ge</option>
+                    <option value="74Ge">74Ge</option>
+                    <option value="76Ge">76Ge</option>
+                    <option value="75As">75As</option>
+                    <option value="74Se">74Se</option>
+                    <option value="76Se">76Se</option>
+                    <option value="77Se">77Se</option>
+                    <option value="78Se">78Se</option>
+                    <option value="Se">Se</option>
+                    <option value="82Se">82Se</option>
+                    <option value="Br">Br</option>
+                    <option value="81Br">81Br</option>
+                    <option value="78Kr">78Kr</option>
+                    <option value="80Kr">80Kr</option>
+                    <option value="82Kr">82Kr</option>
+                    <option value="83Kr">83Kr</option>
+                    <option value="84Kr">84Kr</option>
+                    <option value="86Kr">86Kr</option>
+                    <option value="85Rb">85Rb</option>
+                    <option value="87Rb">87Rb</option>
+                    <option value="84Sr">84Sr</option>
+                    <option value="86Sr">86Sr</option>
+                    <option value="87Sr">87Sr</option>
+                    <option value="88Sr">88Sr</option>
+                    <option value="89Y">89Y</option>
+                    <option value="90Zr">90Zr</option>
+                    <option value="91Zr">91Zr</option>
+                    <option value="92Zr">92Zr</option>
+                    <option value="94Zr">94Zr</option>
+                    <option value="96Zr">96Zr</option>
+                    <option value="93Nb">93Nb</option>
+                    <option value="92Mo">92Mo</option>
+                    <option value="94Mo">94Mo</option>
+                    <option value="95Mo">95Mo</option>
+                    <option value="96Mo">96Mo</option>
+                    <option value="97Mo">97Mo</option>
+                    <option value="98Mo">98Mo</option>
+                    <option value="100Mo">100Mo</option>
+                    <option value="97Tc">97Tc</option>
+                    <option value="98Tc">98Tc</option>
+                    <option value="99Tc">99Tc</option>
+                    <option value="96Ru">96Ru</option>
+                    <option value="98Ru">98Ru</option>
+                    <option value="99Ru">99Ru</option>
+                    <option value="100Ru">100Ru</option>
+                    <option value="101Ru">101Ru</option>
+                    <option value="102Ru">102Ru</option>
+                    <option value="104Ru">104Ru</option>
+                    <option value="103Rh">103Rh</option>
+                    <option value="102Pd">102Pd</option>
+                    <option value="104Pd">104Pd</option>
+                    <option value="105Pd">105Pd</option>
+                    <option value="106Pd">106Pd</option>
+                    <option value="108Pd">108Pd</option>
+                    <option value="110Pd">110Pd</option>
+                    <option value="107Ag">107Ag</option>
+                    <option value="109Ag">109Ag</option>
+                    <option value="106Cd">106Cd</option>
+                    <option value="108Cd">108Cd</option>
+                    <option value="110Cd">110Cd</option>
+                    <option value="111Cd">111Cd</option>
+                    <option value="112Cd">112Cd</option>
+                    <option value="113Cd">113Cd</option>
+                    <option value="114Cd">114Cd</option>
+                    <option value="116Cd">116Cd</option>
+                    <option value="113In">113In</option>
+                    <option value="115In">115In</option>
+                    <option value="112Sn">112Sn</option>
+                    <option value="114Sn">114Sn</option>
+                    <option value="115Sn">115Sn</option>
+                    <option value="116Sn">116Sn</option>
+                    <option value="117Sn">117Sn</option>
+                    <option value="118Sn">118Sn</option>
+                    <option value="119Sn">119Sn</option>
+                    <option value="120Sn">120Sn</option>
+                    <option value="122Sn">122Sn</option>
+                    <option value="124Sn">124Sn</option>
+                    <option value="121Sb">121Sb</option>
+                    <option value="123Sb">123Sb</option>
+                    <option value="120Te">120Te</option>
+                    <option value="122Te">122Te</option>
+                    <option value="123Te">123Te</option>
+                    <option value="124Te">124Te</option>
+                    <option value="125Te">125Te</option>
+                    <option value="126Te">126Te</option>
+                    <option value="128Te">128Te</option>
+                    <option value="130Te">130Te</option>
+                    <option value="127I">127I</option>
+                    <option value="124Xe">124Xe</option>
+                    <option value="126Xe">126Xe</option>
+                    <option value="128Xe">128Xe</option>
+                    <option value="129Xe">129Xe</option>
+                    <option value="130Xe">130Xe</option>
+                    <option value="131Xe">131Xe</option>
+                    <option value="132Xe">132Xe</option>
+                    <option value="134Xe">134Xe</option>
+                    <option value="136Xe">136Xe</option>
+                    <option value="133Cs">133Cs</option>
+                    <option value="130Ba">130Ba</option>
+                    <option value="132Ba">132Ba</option>
+                    <option value="134Ba">134Ba</option>
+                    <option value="135Ba">135Ba</option>
+                    <option value="136Ba">136Ba</option>
+                    <option value="137Ba">137Ba</option>
+                    <option value="138Ba">138Ba</option>
+                    <option value="138La">138La</option>
+                    <option value="139La">139La</option>
+                    <option value="136Ce">136Ce</option>
+                    <option value="138Ce">138Ce</option>
+                    <option value="140Ce">140Ce</option>
+                    <option value="142Ce">142Ce</option>
+                    <option value="141Pr">141Pr</option>
+                    <option value="142Nd">142Nd</option>
+                    <option value="143Nd">143Nd</option>
+                    <option value="144Nd">144Nd</option>
+                    <option value="145Nd">145Nd</option>
+                    <option value="146Nd">146Nd</option>
+                    <option value="148Nd">148Nd</option>
+                    <option value="150Nd">150Nd</option>
+                    <option value="145Pm">145Pm</option>
+                    <option value="147Pm">147Pm</option>
+                    <option value="144Sm">144Sm</option>
+                    <option value="147Sm">147Sm</option>
+                    <option value="148Sm">148Sm</option>
+                    <option value="149Sm">149Sm</option>
+                    <option value="150Sm">150Sm</option>
+                    <option value="152Sm">152Sm</option>
+                    <option value="154Sm">154Sm</option>
+                    <option value="151Eu">151Eu</option>
+                    <option value="153Eu">153Eu</option>
+                    <option value="152Gd">152Gd</option>
+                    <option value="154Gd">154Gd</option>
+                    <option value="155Gd">155Gd</option>
+                    <option value="156Gd">156Gd</option>
+                    <option value="157Gd">157Gd</option>
+                    <option value="158Gd">158Gd</option>
+                    <option value="160Gd">160Gd</option>
+                    <option value="159Tb">159Tb</option>
+                    <option value="156Dy">156Dy</option>
+                    <option value="158Dy">158Dy</option>
+                    <option value="160Dy">160Dy</option>
+                    <option value="161Dy">161Dy</option>
+                    <option value="162Dy">162Dy</option>
+                    <option value="163Dy">163Dy</option>
+                    <option value="164Dy">164Dy</option>
+                    <option value="165Ho">165Ho</option>
+                    <option value="162Er">162Er</option>
+                    <option value="164Er">164Er</option>
+                    <option value="166Er">166Er</option>
+                    <option value="167Er">167Er</option>
+                    <option value="168Er">168Er</option>
+                    <option value="170Er">170Er</option>
+                    <option value="169Tm">169Tm</option>
+                    <option value="168Yb">168Yb</option>
+                    <option value="170Yb">170Yb</option>
+                    <option value="171Yb">171Yb</option>
+                    <option value="172Yb">172Yb</option>
+                    <option value="173Yb">173Yb</option>
+                    <option value="174Yb">174Yb</option>
+                    <option value="176Yb">176Yb</option>
+                    <option value="175Lu">175Lu</option>
+                    <option value="176Lu">176Lu</option>
+                    <option value="174Hf">174Hf</option>
+                    <option value="176Hf">176Hf</option>
+                    <option value="177Hf">177Hf</option>
+                    <option value="178Hf">178Hf</option>
+                    <option value="179Hf">179Hf</option>
+                    <option value="180Hf">180Hf</option>
+                    <option value="180Ta">180Ta</option>
+                    <option value="181Ta">181Ta</option>
+                    <option value="180W">180W</option>
+                    <option value="182W">182W</option>
+                    <option value="183W">183W</option>
+                    <option value="184W">184W</option>
+                    <option value="186W">186W</option>
+                    <option value="185Re">185Re</option>
+                    <option value="187Re">187Re</option>
+                    <option value="184Os">184Os</option>
+                    <option value="186Os">186Os</option>
+                    <option value="187Os">187Os</option>
+                    <option value="188Os">188Os</option>
+                    <option value="189Os">189Os</option>
+                    <option value="190Os">190Os</option>
+                    <option value="192Os">192Os</option>
+                    <option value="191Ir">191Ir</option>
+                    <option value="193Ir">193Ir</option>
+                    <option value="190Pt">190Pt</option>
+                    <option value="192Pt">192Pt</option>
+                    <option value="194Pt">194Pt</option>
+                    <option value="195Pt">195Pt</option>
+                    <option value="196Pt">196Pt</option>
+                    <option value="198Pt">198Pt</option>
+                    <option value="197Au">197Au</option>
+                    <option value="196Hg">196Hg</option>
+                    <option value="198Hg">198Hg</option>
+                    <option value="199Hg">199Hg</option>
+                    <option value="200Hg">200Hg</option>
+                    <option value="201Hg">201Hg</option>
+                    <option value="202Hg">202Hg</option>
+                    <option value="204Hg">204Hg</option>
+                    <option value="203Tl">203Tl</option>
+                    <option value="205Tl">205Tl</option>
+                    <option value="204Pb">204Pb</option>
+                    <option value="206Pb">206Pb</option>
+                    <option value="207Pb">207Pb</option>
+                    <option value="208Pb">208Pb</option>
+                    <option value="209Bi">209Bi</option>
+                    <option value="209Po">209Po</option>
+                    <option value="210Po">210Po</option>
+                    <option value="210At">210At</option>
+                    <option value="211At">211At</option>
+                    <option value="211Rn">211Rn</option>
+                    <option value="220Rn">220Rn</option>
+                    <option value="222Rn">222Rn</option>
+                    <option value="223Fr">223Fr</option>
+                    <option value="223Ra">223Ra</option>
+                    <option value="224Ra">224Ra</option>
+                    <option value="226Ra">226Ra</option>
+                    <option value="228Ra">228Ra</option>
+                    <option value="227Ac">227Ac</option>
+                    <option value="230Th">230Th</option>
+                    <option value="232Th">232Th</option>
+                    <option value="231Pa">231Pa</option>
+                    <option value="233U">233U</option>
+                    <option value="234U">234U</option>
+                    <option value="235U">235U</option>
+                    <option value="236U">236U</option>
+                    <option value="238U">238U</option>
+                    <option value="236Np">236Np</option>
+                    <option value="237Np">237Np</option>
+                    <option value="238Pu">238Pu</option>
+                    <option value="239Pu">239Pu</option>
+                    <option value="240Pu">240Pu</option>
+                    <option value="241Pu">241Pu</option>
+                    <option value="242Pu">242Pu</option>
+                    <option value="244Pu">244Pu</option>
+                    <option value="241Am">241Am</option>
+                    <option value="243Am">243Am</option>
+                    <option value="243Cm">243Cm</option>
+                    <option value="244Cm">244Cm</option>
+                    <option value="245Cm">245Cm</option>
+                    <option value="246Cm">246Cm</option>
+                    <option value="247Cm">247Cm</option>
+                    <option value="248Cm">248Cm</option>
+                    <option value="247Bk">247Bk</option>
+                    <option value="249Bk">249Bk</option>
+                    <option value="249Cf">249Cf</option>
+                    <option value="250Cf">250Cf</option>
+                    <option value="251Cf">251Cf</option>
+                    <option value="252Cf">252Cf</option>
+                    <option value="252Es">252Es</option>
+                    <option value="257Fm">257Fm</option>
+                    <option value="258Md">258Md</option>
+                    <option value="260Md">260Md</option>
+                    <option value="259No">259No</option>
+                    <option value="262Lr">262Lr</option>
+                    <option value="267Rf">267Rf</option>
+                    <option value="268Db">268Db</option>
+                    <option value="271Sg">271Sg</option>
+                    <option value="272Bh">272Bh</option>
+                    <option value="270Hs">270Hs</option>
+                    <option value="276Mt">276Mt</option>
+                    <option value="281Ds">281Ds</option>
+                    <option value="280Rg">280Rg</option>
+                    <option value="285Cn">285Cn</option>
+                    <option value="284Nh">284Nh</option>
+                    <option value="289Fl">289Fl</option>
+                    <option value="288Mc">288Mc</option>
+                    <option value="293Lv">293Lv</option>
+                    <option value="292Ts">292Ts</option>
+                    <option value="294Og">294Og</option>
+                </select></div>
+
+            <div class="column"><input class="input" id="usedAtoms-_-min_count" name="usedAtoms-_-min_count" type="number" min="0"
+                    value="1"></div>
+
+            <div class="column"><input class="input" id="usedAtoms-_-max_count" name="usedAtoms-_-max_count" type="number" min="0"
+                    value="100"></div>
+
+            <div class="column"><input class="input" id="usedAtoms-_-atoms_valence" name="usedAtoms-_-atoms_valence"
+                   type="number", min="0", max="20" value="4"></div>
+
+            <div class="column is-1">
+                <a title="Remove atom" class="remove" href="#">
+                    <span class="icon">
+                        <i class="fa fa-minus-circle" aria-hidden="true"></i>
+                    </span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+</form>
+
+{% endblock %}

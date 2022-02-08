@@ -1,0 +1,59 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+
+/web/venv
+/runner/venv
+/uploader/venv
+/qc_runner/venv
+# C extensions
+*.so
+corems/
+# dependencies
+/coremsapp-data
+/redis-stable
+/node_modules
+/venv
+/web/venv
+/migrations
+package-lock.json
+
+# testing
+/coverage
+/tmp
+# production
+/build
+
+#ide
+.vscode/settings.json
+
+#internal
+/rzr
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.pdf
+
+db/app.b.sqlite
+db/molformulas.sqlite
+db/app.b.sqlite
+.vscode/
+db/app.b.sqlite
+minio_test.py
+nginx.conf
+test_ldap.py
+unistall vs.sh
+upload_forlder_s3.py
+web/app/static/images/ScientificSoftware_large.jpg
+web/app/static/jquery/dataTables.buttons.min.js
+web/app/static/jquery/dataTables.select.min.js

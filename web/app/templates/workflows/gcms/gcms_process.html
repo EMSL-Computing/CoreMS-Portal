@@ -1,0 +1,35 @@
+{% block content %}
+
+<div class="box is-radiusless is-shadowless"> 
+    <form id="gcms_process" method=post enctype=multipart/form-data action= "gcms/process" >
+        {{ gcms_process_form.hidden_tag() }} 
+        <div class="field">
+            {{ gcms_process_form.gcms_data_to_process.label(class='label') }}
+            <div class="control is-expanded">
+              <div class="select is-expanded is-multiple is-fullwidth">
+                {{ gcms_process_form.gcms_data_to_process(id="gcms_data_list") }}
+              </div>
+            </div>
+        </div>
+        <div class="field">
+            {{ gcms_process_form.gcms_reference_file.label(class="label") }}
+            <div class="control">
+              <div class="select is-fullwidth">
+                {{ gcms_process_form.gcms_reference_file(id="gcms_selected_reference_file") }}
+              </div>
+            </div>
+        </div>
+        <div class="field">
+          <label class='label'>Select the Settings Preset</label>
+          <div class="control">
+            <div class="select is-fullwidth">
+              {{ gcms_presets_form.gcms_presets(class="select",id="gcmspresetsubmmit", onchange="updateAllGcmsFormData(this.value)") }}
+            </div>
+          </div>
+        </div>     
+          
+        {{ gcms_process_form.gcms_submit(class="button is-block is-info is-medium is-fullwidth") }}
+        
+    </form>    
+</div>
+{% endblock %}

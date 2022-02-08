@@ -1,0 +1,54 @@
+{% block content %}
+        
+<form id="ftmsPreset" method="POST">
+      <h3 class="subtitle">
+        Settings Presets
+    </h3>    
+    <div class="field">
+        {{ presets_form.ftms_presets.label(class="label") }}
+        <div class="columns is-vcentered">
+          <div class="column">
+            <div class="control">
+              <div class="select is-fullwidth">
+                {{ presets_form.ftms_presets(class="select", onchange="updateAllFtmsFormData(this.value)") }}
+              </div>
+            </div>
+          </div>
+          <div class="column is-1">
+            <a title="Delete Preset", id="delete_ftms_preset" class='delete_ftms_preset' href='#'>
+              <span class="icon">
+              <i class="fa fa-minus-circle" aria-hidden="true"></i>
+              </span>
+            </a>
+          </div>
+          
+        </div>
+
+    </div> 
+    
+    <div class="field">
+      {{ presets_form.new_preset_name.label(class="label") }}
+      <div class="columns is-vcentered">
+        <div class="column">
+          <div class="control">
+            <div class="is-fullwidth">
+              {{ presets_form.new_preset_name(class="input", placeholder="New Preset Name") }}
+            </div>
+          </div>
+        </div>
+        <div class="column is-1">
+          <a title="Save Preset", id="add_ftms_preset" class='add_preset' href='#'>
+            <span class="icon">
+            <i class="fa fa-plus-circle" aria-hidden="true"></i>
+            </span>
+          </a>
+        </div>
+        
+      </div>
+
+  </div> 
+
+    
+   </form>
+
+{% endblock %}

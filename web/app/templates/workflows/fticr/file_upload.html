@@ -1,0 +1,61 @@
+{% block content %}
+
+
+
+<div class="box is-radiusless is-shadowless">
+
+    <form id="ftmsupload" , method=POST enctype=multipart/form-data action="{{ url_for('fticrms.upload') }}">
+        {{ ftms_input_form.hidden_tag() }}
+        
+        <div class="field">
+            <div class="control">
+                {{ ftms_input_form.profile_file.label }}
+                {{ ftms_input_form.profile_file(class="input is-medium", accept=".txt, .csv") }}
+            </div>
+        </div>
+
+        <div class="field">
+            <div class="control">
+                {{ ftms_input_form.centroid_file.label }}
+                {{ ftms_input_form.centroid_file(class="input is-medium",  accept=".txt, .csv, .pks") }}
+            </div>
+        </div>
+
+        <div class="field">
+            <div class="control">
+                {{ ftms_input_form.files.label }}
+                {{ ftms_input_form.files(class="input is-medium",  accept=".raw") }}
+            </div>
+        </div>
+
+        <div class="field">
+            <div class="control">
+                {{ ftms_input_form.bruker_files.label }}
+                {{ ftms_input_form.bruker_files(class="input is-medium",  accept=".d", webkitdirectory="webkitdirectory", mozdirectory="mozdirectory") }}
+            </div>
+        </div>
+        <div class="field">
+            <div class="control">
+                {{ ftms_input_form.cal_ref_file.label(class="file-label") }}
+                {{ ftms_input_form.cal_ref_file(class="input is-medium",  accept=".ref") }}
+            </div>
+        </div>
+        <!--
+        <div class="field">
+            <div class="control">
+                {{ ftms_input_form.outfilename(class="input is-medium", placeholder="Output Group Name") }}
+            </div>
+        </div>
+        -->
+        {{ ftms_input_form.submit(class="button is-block is-info is-medium is-fullwidth", id='upload_ftmsdata') }}
+        <div class="control mt-4">
+            <div id="progressBar" class="progress" data-label="0% Complete">
+                <span id="valueprogress" class="value" style="width:0%;"></span>
+            </div>
+        </div>
+        <p>
+             
+    </form>
+
+</div>
+{% endblock %}

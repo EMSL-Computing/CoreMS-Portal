@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class=container>
+    <div class="intro column is-8 is-offset-2">
+        <h2 class="title">Welcome to <b class="has-text-info">CoreMS</b> Beta Testing</h2><br>
+        <p class="subtitle">The CoreMS web application was build to manage data, process it using different workflow types, data visualization, and easily connect the results of the molecular identification of small molecules analyzed by mass spectrometric methods to data curation services. 
+        </p>
+    </div>
+    <div class="columns features mt-5 ">
+        <div class="column is-4 " >
+            <div class="card is-shady " style="min-height: 40vh;">
+                <div class="card-image has-text-centered">
+                    <span class="icon has-text-info icon is-large">
+                        <i class="fas fa-2x fa-cogs"></i>
+                      </span>
+                </div>
+                <div class="card-content">
+                    <div class="content">
+                        <h4>Implemented Workflows </h4>
+                        <p>Low Resolution GC-MS based <b>metabolomics</b> workflow</p>
+                        <p>Direct Infusion FT-MS analysis of <b>natural organic matter</b>, and other <b>small molecules</b> </p>
+                        <p><a href="{{ url_for('main.help') }}">Learn more</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="column is-4">
+            <div class="card is-shady " style="min-height: 40vh;">
+                <div class="card-image has-text-centered is-128x128">
+                    <span class="icon has-text-info is-large">
+                        <i class="fas fa-2x fa-database"></i>
+                      </span>
+                </div>
+                <div class="card-content">
+                    <div class="content">
+                        <h4>Features</h4>
+                        <p>Upload and manage raw data files</p>
+                        <p>Raw data pre-processed data visualization</p>
+                        <p>Change and manage workflow parameters</p>
+                        <p>Submit the data data processing, annotation</p>
+                        <p><a href="{{ url_for('main.help') }}">Learn more</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="column is-4">
+            <div class="card is-shady" style="min-height: 40vh;">
+                <div class="card-image has-text-centered" >
+                    <span class="icon has-text-info is-large">
+                        <i class="fas fa-2x fa-chart-bar"></i>
+                      </span>
+                </div>
+                <div class="card-content">
+                    <div class="content">
+                        <h4> Features </h4>
+                        <p>Management and visualization results</p>
+                        <p>Download and submit the results to curation services (Freda, etc)</p>
+                        <p>Upload the results to the data management service</p>
+                        <p><a href="{{ url_for('main.help') }}">Learn more</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

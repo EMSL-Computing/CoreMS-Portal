@@ -1,0 +1,35 @@
+{% block content %}
+
+<div class="box is-radiusless is-shadowless"> 
+    <form id="ftms_process" method=post enctype=multipart/form-data action="ftms/process">
+        {{ ftms_submit_form.hidden_tag() }}
+        <div class="field">
+            {{ ftms_submit_form.data_to_process.label(class='label') }}
+            <div class="control is-expanded">
+              <div class="select is-expanded is-multiple is-fullwidth">
+                {{ ftms_submit_form.data_to_process(id="ftms_data_list") }}
+              </div>
+            </div>
+        </div>
+        <div class="field">
+            {{ ftms_submit_form.reference_file.label(class="label") }}
+            <div class="control">
+              <div class="select is-fullwidth">
+                {{ ftms_submit_form.reference_file() }}
+              </div>
+            </div>
+        </div>
+        <div class="field">
+          <label class='label'>Select the Settings Preset</label>
+          <div class="control">
+            <div class="select is-fullwidth">
+              {{ presets_form.ftms_presets(class="select",id="ftmspresetsubmmit", onchange="updateAllFtmsFormData(this.value)") }}
+            </div>
+          </div>
+        </div>     
+          
+        {{ ftms_submit_form.submit(class="button is-block is-info is-medium is-fullwidth") }}
+        
+    </form>    
+</div>
+{% endblock %}

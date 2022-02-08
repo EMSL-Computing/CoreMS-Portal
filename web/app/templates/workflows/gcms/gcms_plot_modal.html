@@ -1,0 +1,30 @@
+<div id=gcmsplot class="modal">
+    <div class="modal-background"></div>
+    <div class="modal-content " style="min-height: 85vh; width: 85vw;">
+     
+        <div class="card">
+            <header class="card-header">
+              <p class="card-header-title">
+                <strong>Dataset Name: </strong> {{ out_filename }}
+              </p>
+              <a href="{{ down_href }}" class="card-header-icon" aria-label="more options" title="Save Dataset {{ out_filename }} Results ">
+                <span class="icon">
+                  <i class="fas fa-save" aria-hidden="true"></i>
+                </span>
+              </a>
+            </header>
+            <div class="card-content">
+              <div class="content " style="min-height: 70vh;">
+                {% for plot_script, plot_div in script_list%}
+                    {{ plot_script|indent(4)|safe }}
+                    {{ plot_div|indent(4)|safe }}
+                   
+                {%endfor%} 
+              </div>
+            </div>
+          </div>
+      
+    </div>
+    <button id="modal-close", class="modal-close is-large" aria-label="close"></button>
+  </div>
+

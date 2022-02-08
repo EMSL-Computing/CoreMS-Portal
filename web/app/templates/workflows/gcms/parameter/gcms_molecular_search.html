@@ -1,0 +1,141 @@
+{% block content %}
+
+<form class="gcmssettings" id="gcmsmolecularsearchsettings" onsubmit="UpdateGcmsFormData(this.id)" method="post">
+    {{ gcms_molecular_search_form.hidden_tag() }}
+    <h3 class="subtitle">
+        Molecular Search Settings
+    </h3>
+    <hr>
+    
+    <div class="field is-horizontal">
+        <div class="field-label is-normal">
+        {{ gcms_molecular_search_form.ri_search_range.label(class="label") }}
+        </div>
+        <div class="field-body">
+            <div class="field">
+                <div class="control">
+                    {{ gcms_molecular_search_form.ri_search_range(class="input", step='0.1',  type="number", min="0") }}  
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="field is-horizontal">
+        <div class="field-label is-normal">
+        {{ gcms_molecular_search_form.rt_search_range.label(class="label") }}
+        </div>
+        <div class="field-body">
+            <div class="field">
+                <div class="control">
+                    {{ gcms_molecular_search_form.rt_search_range(class="input", step='0.01', type="number", min="0") }}  
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="field is-horizontal">
+        <div class="field-label is-normal">
+        {{ gcms_molecular_search_form.correlation_threshold.label(class="label") }}
+        </div>
+        <div class="field-body">
+            <div class="field">
+                <div class="control">
+                    {{ gcms_molecular_search_form.correlation_threshold(class="input",  step='0.001', type="number", min="0") }}  
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="field is-horizontal">
+        <div class="field-label is-normal">
+        {{ gcms_molecular_search_form.score_threshold.label(class="label") }}
+        </div>
+        <div class="field-body">
+            <div class="field">
+                <div class="control">
+                    {{ gcms_molecular_search_form.score_threshold(class="input",  step='0.01', type="number", min="0") }}  
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="field is-horizontal">
+        <div class="field-label is-normal">
+        {{ gcms_molecular_search_form.ri_std.label(class="label") }}
+        </div>
+        <div class="field-body">
+            <div class="field">
+                <div class="control">
+                    {{ gcms_molecular_search_form.ri_std(class="input",  step='0.1',  type="number", min="0") }}  
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="field is-horizontal">
+        <div class="field-label is-normal">
+        {{ gcms_molecular_search_form.output_score_method.label(class="label") }}
+        </div>
+        <div class="field-body">
+            <div class="field">
+                <div class="control">
+                    <div class="select is-fullwidth">
+                        {{ gcms_molecular_search_form.output_score_method(class="select",  type="number", min="0") }}  
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="field is-horizontal">
+        <div class="field-label is-normal">
+        {{ gcms_molecular_search_form.exploratory_mode.label(class="label") }}
+        </div>
+        <div class="field-body">
+            <div class="field">
+                <div class="control">
+                   {{ gcms_molecular_search_form.exploratory_mode }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+     <h2 class="subtitle">
+        Retention Index Calculation
+    </h2>
+    <hr>
+
+    <div class="field is-horizontal">
+        <div class="field-label is-normal">
+        {{ gcms_molecular_search_form.ri_calibration_compound_names.label(class='label') }}
+        </div>
+        <div class="field-body">
+            <div class="field">
+                <div class="select is-expanded is-multiple is-fullwidth">
+                  {{ gcms_molecular_search_form.ri_calibration_compound_names(id="gcms_calref_list") }}
+                </div>
+            </div>
+        </div>
+    </div>
+      <hr>
+    <div class="field is-horizontal">
+        <div class="field-label">
+            <!-- Left empty for spacing -->
+        </div>
+        <div class="field-body">
+            <div class="field">
+                <div class="control">
+                    {{ gcms_molecular_search_form.submitcompoundsearch(class="button is-block is-info is-medium is-fullwidth") }}
+                </div>
+            </div>
+        </div>
+    </div>
+   
+
+    {% if gcms_molecular_search_form.errors %}
+    {{ gcms_molecular_search_form.errors }}
+    {% endif %}
+
+</form>
+
+{% endblock %}

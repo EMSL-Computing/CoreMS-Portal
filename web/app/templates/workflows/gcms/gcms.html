@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="column column is-6 is-offset-3">
+        
+        <div class="box"> 
+            <h3 class="subtitle">
+                GC-MS Metabolomics Workflow
+            </h3>
+            <form id=gc_ms_form method='POST' action="/gcms" enctype=multipart/form-data>
+                <div class="field">
+                    
+                    <div class="control">
+                        Calibration File (.cdf)
+                        <input class="input is-medium" type="file" name="cal_file" accept=".cdf" required>
+                    </div>
+                    </label>
+                </div>
+
+                <div class="field">
+                    <div class="control">
+                        Dataset Files (.cdf)
+                        <input class="input is-medium" type="file" name="files[]" multiple="true" autocomplete="off" required>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="control">
+                        <input class="input is-medium" type="text" id="outfilename" name="outfilename" placeholder="Output Filename" required>
+                    </div>
+                </div>
+                <button id='start_workflow'  class="button is-block is-info is-medium is-fullwidth">Submit</button>
+                <br>
+            </form>
+            <div class="control">
+                <progress id="workflow_progress" class="progress is-info is-medium" value="0" max="100"></progress>
+            </div>
+        </div>
+        
+        <p>
+            
+        </p>
+    </div>
+    
+{% endblock %}

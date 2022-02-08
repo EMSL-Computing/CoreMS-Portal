@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="box is-radiusless is-shadowless">
+
+  <form  method="POST" action="/profile">
+    {{ profile_form.hidden_tag() }}
+    <h3 class="subtitle">
+        User Information
+    </h3>    
+    
+    <div class="field">
+        {{ profile_form.email.label(class="label is-left") }}  
+        <div class="control">
+            <div class="is-fullwidth">
+                {{ profile_form.email(class="input is-disable") }}
+            </div>
+        </div>
+    </div>
+
+    <div class="field">
+        {{ profile_form.first_name.label(class="label is-left") }}  
+        <div class="control">
+            <div class="is-fullwidth">
+                {{ profile_form.first_name(class="input") }}
+            </div>
+        </div>
+    </div>
+
+    <div class="field">
+        {{ profile_form.last_name.label(class="label is-left") }}  
+        <div class="control">
+            <div class="is-fullwidth">
+                {{ profile_form.last_name(class="input") }}
+            </div>
+        </div>
+    </div>
+
+    <div class="field">
+      <div class="control">
+          <div class="is-fullwidth">
+            {{ profile_form.submit_profile(class="button is-block is-info is-medium is-fullwidth") }}
+          </div>
+      </div>
+  </div>
+
+</form>
+
+</div>
+{% endblock %}

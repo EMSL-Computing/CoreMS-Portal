@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+{{ js_resources|indent(4)|safe }}
+{{ css_resources|indent(4)|safe }}
+<div class="card">
+    <header class="card-header">
+      <p class="card-header-title">
+        <strong>Dataset Name: </strong> {{ out_filename }}
+      </p>
+      <a href="{{ url_for('gcms.send_file', filename=out_filename+out_type) }}" class="card-header-icon" aria-label="more options" title="Save Dataset {{ out_filename }} Results ">
+        <span class="icon">
+          <i class="fas fa-save" aria-hidden="true"></i>
+        </span>
+      </a>
+    </header>
+    <div class="card-content">
+      <div class="content">
+        {% for plot_script, plot_div in script_list%}
+            {{ plot_script|indent(4)|safe }}
+            {{ plot_div|indent(4)|safe }}
+            <hr>
+        {%endfor%} 
+      </div>
+    </div>
+  </div>
+{% endblock %}

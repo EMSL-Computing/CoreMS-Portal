@@ -1,0 +1,216 @@
+{% block content %}
+
+<form class="gcmssettings" id="gcmspeakdetectionsettings" onsubmit="UpdateGcmsFormData(this.id)" method="post">
+    {{ gcms_peak_detection_form.hidden_tag() }}
+    <h3 class="subtitle">
+        m/z Peak Deconvolution
+    </h3>
+    <hr>
+
+    <div class="field is-horizontal">
+        <div class="field-label is-normal">
+        {{ gcms_peak_detection_form.use_deconvolution.label(class="label") }}
+        </div>
+        <div class="field-body">
+            <div class="field">
+                <div class="control">
+                   {{ gcms_peak_detection_form.use_deconvolution }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+     <div class="field is-horizontal">
+        <div class="field-label is-normal">
+        {{ gcms_peak_detection_form.eic_signal_threshold.label(class="label") }}
+        </div>
+        <div class="field-body">
+            <div class="field">
+                <div class="control">
+                    {{ gcms_peak_detection_form.eic_signal_threshold(class="input", step='0.0001', type="number", min="0") }}  
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="field is-horizontal">
+        <div class="field-label is-normal">
+        {{ gcms_peak_detection_form.max_rt_distance.label(class="label") }}
+        </div>
+        <div class="field-body">
+            <div class="field">
+                <div class="control">
+                    {{ gcms_peak_detection_form.max_rt_distance(class="input", step='0.0001', type="number", min="0") }}  
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h3 class="subtitle">
+        Signal Processing
+    </h3>
+    <hr>
+
+    <div class="field is-horizontal">
+        <div class="field-label is-normal">
+        {{ gcms_peak_detection_form.smooth_window.label(class="label") }}
+        </div>
+        <div class="field-body">
+            <div class="field">
+                <div class="control">
+                    {{ gcms_peak_detection_form.smooth_window(class="input",  type="number", min="0") }}  
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="field is-horizontal">
+        <div class="field-label is-normal">
+        {{ gcms_peak_detection_form.smooth_method.label(class="label") }}
+        </div>
+        <div class="field-body">
+            <div class="field">
+                <div class="control">
+                    <div class="select is-fullwidth">
+                        {{ gcms_peak_detection_form.smooth_method(class="select",  type="number", min="0") }}  
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="field is-horizontal">
+        <div class="field-label is-normal">
+        {{ gcms_peak_detection_form.noise_threshold_method.label(class="label") }}
+        </div>
+        <div class="field-body">
+            <div class="field">
+                <div class="control">
+                     <div class="select is-fullwidth">
+                    {{ gcms_peak_detection_form.noise_threshold_method(class="select") }}  
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="field is-horizontal">
+        <div class="field-label is-normal">
+        {{ gcms_peak_detection_form.std_noise_threshold.label(class="label") }}
+        </div>
+        <div class="field-body">
+            <div class="field">
+                <div class="control">
+                    {{ gcms_peak_detection_form.std_noise_threshold(class="input", step='0.1', type="number", min="0") }}  
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h3 class="subtitle">
+        Peak Detection 
+    </h3>
+    <hr>
+
+    <div class="field is-horizontal">
+        <div class="field-label is-normal">
+        {{ gcms_peak_detection_form.peak_height_min_percent.label(class="label") }}
+        </div>
+        <div class="field-body">
+            <div class="field">
+                <div class="control">
+                    {{ gcms_peak_detection_form.peak_height_min_percent(class="input", step='0.01', type="number", min="0") }}  
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="field is-horizontal">
+        <div class="field-label is-normal">
+        {{ gcms_peak_detection_form.peak_min_prominence_percent.label(class="label") }}
+        </div>
+        <div class="field-body">
+            <div class="field">
+                <div class="control">
+                    {{ gcms_peak_detection_form.peak_min_prominence_percent(class="input", step='0.01', type="number", min="0") }}  
+                </div>
+            </div>
+        </div>
+    </div>
+
+     <div class="field is-horizontal">
+        <div class="field-label is-normal">
+        {{ gcms_peak_detection_form.min_peak_datapoints.label(class="label") }}
+        </div>
+        <div class="field-body">
+            <div class="field">
+                <div class="control">
+                    {{ gcms_peak_detection_form.min_peak_datapoints(class="input", type="number", min="0") }}  
+                </div>
+            </div>
+        </div>
+    </div>
+
+     <h3 class="subtitle">
+        Chromatogram Baseline Detection 
+    </h3>
+    <hr>
+
+    <div class="field is-horizontal">
+        <div class="field-label is-normal">
+        {{ gcms_peak_detection_form.peak_height_max_percent.label(class="label") }}
+        </div>
+        <div class="field-body">
+            <div class="field">
+                <div class="control">
+                    {{ gcms_peak_detection_form.peak_height_max_percent(class="input", step='0.01', type="number", min="0") }}  
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="field is-horizontal">
+        <div class="field-label is-normal">
+        {{ gcms_peak_detection_form.peak_max_prominence_percent.label(class="label") }}
+        </div>
+        <div class="field-body">
+            <div class="field">
+                <div class="control">
+                    {{ gcms_peak_detection_form.peak_max_prominence_percent(class="input", step='0.01', type="number", min="0") }}  
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="field is-horizontal">
+        <div class="field-label is-normal">
+        {{ gcms_peak_detection_form.max_peak_width.label(class="label") }}
+        </div>
+        <div class="field-body">
+            <div class="field">
+                <div class="control">
+                    {{ gcms_peak_detection_form.max_peak_width(class="input", step='0.01', type="number", min="0") }}  
+                </div>
+            </div>
+        </div>
+    </div>
+    
+      <hr>
+    <div class="field is-horizontal">
+        <div class="field-label">
+            <!-- Left empty for spacing -->
+        </div>
+        <div class="field-body">
+            <div class="field">
+                <div class="control">
+                    {{ gcms_peak_detection_form.submitchromasettings(class="button is-block is-info is-medium is-fullwidth") }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+  
+   
+</form>
+
+{% endblock %}    
