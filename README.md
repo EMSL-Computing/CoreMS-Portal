@@ -63,7 +63,7 @@
 
 ## Kubernetes 
 
-If you don't have kompose installed: [install kompose](https://kompose.io/setup/)
+If you don't have kompose installed: [install kompose](https://kompose.io/installation/)
 
 - Build from source:
 
