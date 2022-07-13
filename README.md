@@ -47,12 +47,22 @@
    
      ```
 
-- After the first deployment, we need to start migration and create all the database tables. Open the terminal, cd into the root directory:
+- After the first deployment, and with the services running, we need to start migration and create all the database tables. Open a new terminal, cd into the local_app directory and then type:
 
     ```bash
     make init-db
 
     ```
+    or if you don't have make installed, do this three commands: 
+    
+    ```
+    docker-compose exec web flask db init
+    docker-compose exec web flask db migrate -m "init commit"
+    docker-compose exec web flask db upgrade
+    ```
+
+- Open you browser and go to http://localhost
+
 
 - To take all the services down and remove all the volumes:
     
@@ -60,9 +70,6 @@
     docker-compose down -v
 
     ```
-
-- Open you browser and go to http://localhost
-
 ## Kubernetes 
 
 If you don't have kompose installed: [install kompose](https://kompose.io/installation/)
