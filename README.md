@@ -63,6 +63,8 @@
 
     ```
 
+- Open you browser and go to http://localhost
+
 ## Kubernetes 
 
 If you don't have kompose installed: [install kompose](https://kompose.io/installation/)
