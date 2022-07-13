@@ -70,15 +70,5 @@
     docker-compose down -v
 
     ```
-## Kubernetes 
 
-If you don't have kompose installed: [install kompose](https://kompose.io/installation/)
-
-- Build from source:
-
-    ```bash
-    kompose convert -f docker-compose.yml -o ./kubernetes
-	kubectl create -f ./kubernetes
-    
-    ```
     
