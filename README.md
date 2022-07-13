@@ -36,10 +36,8 @@
 - [install docker for desktop](https://hub.docker.com/?overlay=onboarding)
 
   There are two main way to start a local deployment, building from source, our using the images from docker hub.
-   
- - To start from source, open a terminal and cd into the root project directory. 
 
- - To start from the pre built images, open the terminal and cd into CoreMS-Portal directory
+ - To start from the pre built images, open the terminal and cd into local_app directory
  
    then: ( this command will build and pull the images, create the containers, volumes and network)
      
