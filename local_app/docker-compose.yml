@@ -2,7 +2,7 @@ version: '3.7'
 services:
   web:
     restart: always
-    image: emslcomputing/corems-web:3.8.2 
+    image: emslcomputing/corems-web:3.9.6
     ports: 
       - 80:80
     env_file:
@@ -21,7 +21,7 @@ services:
   
   runner:
     restart: always
-    image: emslcomputing/corems-runner:3.8.2 
+    image: emslcomputing/corems-runner:3.9.7
     env_file:
       - ./prod.env
       - ./minio.env
