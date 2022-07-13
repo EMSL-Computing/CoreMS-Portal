@@ -31,6 +31,8 @@
 
 ## Local Deployment using docker-compose
 
+- To start download or git clone this repository :D
+
 - [install docker for desktop](https://hub.docker.com/?overlay=onboarding)
 
   There are two main way to start a local deployment, building from source, our using the images from docker hub.
